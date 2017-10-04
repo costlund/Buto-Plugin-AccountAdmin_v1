@@ -1,0 +1,41 @@
+url: '/[class]/account_base_capture'
+ajax: true
+submit_value: Save
+id: frm_account_form
+items:
+  id:
+    type: hidden
+    label: ID
+  email:
+    type: varchar
+    label: Email
+    mandatory: true
+    validator:
+      -
+        plugin: wf/form_v2
+        method: validate_email
+  password:
+    type: varchar
+    label: Password
+    mandatory: true
+    validatorzzz:
+      -
+        plugin: wf/form_v2
+        method: validate_password
+  phone:
+    type: varchar
+    label: Phone
+  activated:
+    type: varchar
+    label: Activated
+    option:
+      '': ''
+      '1': 'Yes'
+    info:
+      text: 'Account must be activated for user to sign in.'
+render:
+  plugin: 'account/admin_v1'
+  method: frm_account_base_form_render
+capture:
+  plugin: 'account/admin_v1'
+  method: frm_account_base_form_capture

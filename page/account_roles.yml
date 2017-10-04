@@ -1,0 +1,10 @@
+-
+  type: table
+  attribute:
+    class: 'table'
+    id: table_account_role
+  innerHTML:
+    tbody:
+      type: tbody
+      attribute: {id: tbody_account_role}
+      innerHTML:

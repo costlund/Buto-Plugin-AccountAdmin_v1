@@ -1,0 +1,90 @@
+-
+  type: h1
+  attribute:
+    onclick: "PluginWfAjax.update('desktop_content');"
+  innerHTML: Accounts
+-
+  type: div
+  attribute:
+    class: 'table-responsive'
+  innerHTML:
+    -
+      type: table
+      attribute:
+        class: table
+        id: table_accounts
+      innerHTML:
+        thead:
+          type: thead
+          innerHTML:
+            -
+              type: tr
+              innerHTML:
+                -
+                  type: th
+                  innerHTML: 'Email'
+                -
+                  type: th
+                  innerHTML: 'Password'
+                -
+                  type: th
+                  innerHTML: 'Activated'
+                -
+                  type: th
+                  innerHTML: 'Activated key'
+                -
+                  type: th
+                  innerHTML: 'Activated password'
+                -
+                  type: th
+                  innerHTML: 'Activated date'
+                -
+                  type: th
+                  innerHTML: 'Change email'
+                -
+                  type: th
+                  innerHTML: 'Change email key'
+                -
+                  type: th
+                  innerHTML: 'Change email date'
+                -
+                  type: th
+                  innerHTML: 'Phone'
+                -
+                  type: th
+                  innerHTML: 'TFA key'
+                -
+                  type: th
+                  innerHTML: 'TFA date'
+                -
+                  type: th
+                  innerHTML: 'Cert ID'
+        tbody:
+          type: tbody
+          attribute:
+            id: tbody
+        datatable:
+          type: widget
+          data:
+            plugin: datatable/datatable_1_10_16
+            method: run
+            data:
+              id: table_accounts
+              json:
+                paging: true
+                iDisplayLength: 10
+                ordering: true
+                info: true
+                searching: true
+                order:
+                  -
+                    - 0
+                    - desc
+                language:
+                  url: /plugin/datatable/datatable_1_10_16/i18n/Swedish.json
+      
+
+   
+   
+   
+   

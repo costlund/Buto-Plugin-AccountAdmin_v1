@@ -1,0 +1,88 @@
+-
+  type: script
+  attribute:
+    id: script
+  innerHTML: ""
+-
+  type: h1
+  attribute:
+    onclick: "PluginWfAjax.update('content');"
+  innerHTML: Account
+-
+  type: div
+  attribute:
+    class: row
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: col-sm-8
+      innerHTML:
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_delete', url: '/'+app.class+'/account_delete/id/'+app.account_id+'', lable: 'Delete account'});"
+          innerHTML: Delete
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form/id/'+app.account_id+'', lable: 'Account'});"
+          innerHTML: Edit
+        -
+          type: h2
+          attribute:
+            onclick: "PluginWfAjax.update('account_base');"
+          innerHTML: Base data
+        -
+          type: div
+          attribute:
+            id: account_base
+          innerHTML: _
+        -
+          type: script
+          innerHTML: "PluginWfAjax.load('account_base', '/'+app.class+'/account_base/id/'+app.account_id);"
+    -
+      type: div
+      attribute:
+        class: col-sm-4
+        style: "min-height:600px;"
+      innerHTML:
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_role_form', url: '/'+app.class+'/account_role_form/id/'+app.account_id+'', lable: $('#add_role').text(), size: 'sm' });"
+            id: add_role
+          innerHTML: Add role
+        -
+          type: h2
+          attribute:
+            onclick: "PluginWfAjax.update('account_roles');"
+          innerHTML: Role
+        -
+          type: div
+          attribute:
+            id: account_roles
+          innerHTML: _
+        -
+          type: script
+          innerHTML: "PluginWfAjax.load('account_roles', '/'+app.class+'/account_roles/id/'+app.account_id);"
+    -
+      type: div
+      attribute:
+        class: col-sm-12
+      innerHTML:
+        -
+          type: h2
+          attribute:
+            onclick: "PluginWfAjax.update('account_log');"
+          innerHTML: Log
+        -
+          type: div
+          attribute:
+            id: account_log
+          innerHTML: _
+        -
+          type: script
+          innerHTML: "PluginWfAjax.load('account_log', '/'+app.class+'/account_log/id/'+app.account_id);"
+          
+   

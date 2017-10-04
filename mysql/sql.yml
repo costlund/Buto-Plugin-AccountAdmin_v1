@@ -1,0 +1,116 @@
+accounts:
+  sql: |
+    select id,email,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
+    from account
+    order by email;
+  select:
+    - id
+    - email
+    - password
+    - activated
+    - activate_key
+    - activate_password
+    - activate_date
+    - change_email_email
+    - change_email_key
+    - change_email_date
+    - phone
+    - two_factor_authentication_key
+    - two_factor_authentication_date
+    - cert_id
+account:
+  sql: |
+    select id,email,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
+    from account
+    where id=?
+    ;
+  select:
+    - id
+    - email
+    - password
+    - activated
+    - activate_key
+    - activate_password
+    - activate_date
+    - change_email_email
+    - change_email_key
+    - change_email_date
+    - phone
+    - two_factor_authentication_key
+    - two_factor_authentication_date
+    - cert_id
+  params:
+    account_id:
+      type: s
+account_log:
+  sql: "select type, date from account_log where account_id=? order by date desc;"
+  select:
+    - type
+    - date
+  params:
+    account_id:
+      type: s
+account_roles:
+  sql: "select id, role from account_role where account_id=? order by role;"
+  select:
+    - id
+    - role
+  params:
+    account_id:
+      type: s
+account_role:
+  sql: "select role from account_role where id=? and account_id=?;"
+  select:
+    - role
+  params:
+    id:
+      type: i
+    account_id:
+      type: s
+account_role_update:
+  sql: "update account_role set role=? where id=? and account_id=?;"
+  params:
+    role:
+      type: s
+    id:
+      type: i
+    account_id:
+      type: s
+account_role_insert:
+  sql: "insert into account_role (account_id, role) values (?,?);"
+  params:
+    account_id:
+      type: s
+    role:
+      type: s
+account_role_delete:
+  sql: "delete from account_role where id=? and account_id=?;"
+  params:
+    id:
+      type: i
+    account_id:
+      type: s
+account_capture_update:
+  sql: "update account set email=?, password=?, phone=?, activated=? where id=?;"
+  params:
+    email:
+      type: s
+    password:
+      type: s
+    phone:
+      type: s
+    activated:
+      type: i
+    id:
+      type: s
+account_capture_insert:
+  sql: "insert into account (id) values (?);"
+  params:
+    id:
+      type: s
+account_delete:
+  sql: "delete from account where id=?;"
+  params:
+    id:
+      type: s
+  

@@ -1,0 +1,241 @@
+<?php
+/**
+ * Page plugin to hande accounts.
+ * Involved tables is account, account_role and account_log.
+ * Role webmaster i required.
+ */
+class PluginAccountAdmin_v1{
+  private $settings = null;
+  private $sql = null;
+  function __construct($buto = false) {
+    if($buto){
+      if(!wfUser::hasRole("webmaster")){
+        exit('Role webmaster is required!');
+      }
+      $GLOBALS['sys']['settings']['plugin']['datatable']['datatable_1_10_16']['enabled'] = 'true';
+      $GLOBALS['sys']['settings']['plugin']['wf']['form_v2']['enabled'] = 'true';
+    }
+  }
+  private function init(){
+    wfPlugin::includeonce('wf/array');
+    wfPlugin::includeonce('wf/yml');
+    $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
+    $this->settings->set('mysql', wfSettings::getSettingsFromYmlString($this->settings->get('mysql')));
+     $this->sql = wfSettings::getSettingsAsObject("/plugin/account/admin_v1/mysql/sql.yml");
+  }
+  public function page_desktop(){
+    $this->init();
+    wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/account/admin_v1/layout');
+    $page = $this->getYml('page/desktop.yml');
+    $page->set('content/app/innerHTML', "var app = {class: '".wfArray::get($GLOBALS, 'sys/class')."'};");
+    wfDocument::mergeLayout($page->get());
+  }
+  public function page_accounts(){
+    $this->init();
+    $rs = $this->executeSQL($this->sql->get('accounts'));
+    $page = $this->getYml('page/accounts.yml');
+    $trs = array();
+    foreach ($rs->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      $trs[] = wfDocument::createHtmlElement('tr', array(
+      wfDocument::createHtmlElement('td', $item->get('email')),
+      wfDocument::createHtmlElement('td', $item->get('password')),
+      wfDocument::createHtmlElement('td', $item->get('activated')),
+      wfDocument::createHtmlElement('td', $item->get('activate_key')),
+      wfDocument::createHtmlElement('td', $item->get('activate_password')),
+      wfDocument::createHtmlElement('td', $item->get('activate_date')),
+      wfDocument::createHtmlElement('td', $item->get('change_email_email')),
+      wfDocument::createHtmlElement('td', $item->get('change_email_key')),
+      wfDocument::createHtmlElement('td', $item->get('change_email_date')),
+      wfDocument::createHtmlElement('td', $item->get('phone')),
+      wfDocument::createHtmlElement('td', $item->get('two_factor_authentication_key')),
+      wfDocument::createHtmlElement('td', $item->get('two_factor_authentication_date')),
+      wfDocument::createHtmlElement('td', $item->get('cert_id'))
+      ), array('style' => 'cursor:pointer', 'onclick' => "PluginWfBootstrapjs.modal({id: 'account_view', url: '/'+app.class+'/account_view/id/".$item->get('id')."', lable: 'Account', size: 'lg'});"));
+    }
+    $page->setById('tbody', 'innerHTML', $trs);
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_view(){
+    $this->init();
+    $page = $this->getYml('page/account_view.yml');
+    $page->setById('script', 'innerHTML', "app.account_id='".wfRequest::get('id')."'");
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_base(){
+    $this->init();
+    $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
+    $rs = $this->executeSQL($this->sql->get('account'));
+    if($rs){$rs = new PluginWfArray($rs->get('0'));}
+    $page = $this->getYml('page/account_base.yml');
+    foreach ($rs->get() as $key => $value) {
+      $page->setById($key, 'innerHTML', $value);
+    }
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_base_form(){
+    $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
+    wfDocument::renderElement(array($widget));
+  }
+  public function page_account_role_form(){
+    $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
+    wfDocument::renderElement(array($widget));
+    if(wfRequest::get('role_id')){
+      $html_object = $this->getYml('html_object/role_delete_button.yml');
+      $html_object->setById('btn_delete', 'attribute/data-role_id', wfRequest::get('role_id'));
+      wfDocument::renderElement($html_object->get());
+    }
+  }
+  public function page_account_role_capture(){
+    $widget = wfDocument::createWidget('wf/form_v2', 'capture', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
+    wfDocument::renderElement(array($widget));
+  }
+  public function frm_account_base_form_render($form){
+    $this->init();
+    if(wfRequest::get('id')){
+      /**
+       * Get account data.
+       */
+      $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
+      $rs = $this->executeSQL($this->sql->get('account'));
+      if($rs){$rs = new PluginWfArray($rs->get('0'));}
+      /**
+       * Set form.
+       */
+      $form->set('items/id/default', wfRequest::get('id'));
+      $form->set('items/email/default', $rs->get('email'));
+      $form->set('items/password/default', $rs->get('password'));
+      $form->set('items/phone/default', $rs->get('phone'));
+      $form->set('items/activated/default', $rs->get('activated'));
+    }
+    return $form;
+  }
+  public function frm_account_role_form_render($form){
+    $this->init();
+    $form->set('items/account_id/default', wfRequest::get('id'));
+    if(wfRequest::get('role_id')){
+      $form->set('items/id/default', wfRequest::get('role_id'));
+      /**
+       * Get account data.
+       */
+      $this->sql->set('account_role/params/id/value', wfRequest::get('role_id'));
+      $this->sql->set('account_role/params/account_id/value', wfRequest::get('id'));
+      $rs = $this->executeSQL($this->sql->get('account_role'));
+      if($rs){$rs = new PluginWfArray($rs->get('0'));}
+      $form->set('items/role/default', $rs->get('role'));
+    }
+    return $form;
+  }
+  public function page_account_base_capture(){
+    $widget = wfDocument::createWidget('wf/form_v2', 'capture', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
+    wfDocument::renderElement(array($widget));
+  }
+  public function frm_account_base_form_capture($form){
+    $this->init();
+    $new = true;
+    if($form->get('items/id/post_value')){
+      $new = false;
+    }
+    if($new){
+      $form->set('items/id/post_value', $this->createAccount());
+    }
+    $this->sql->set('account_capture_update/params/id/value', $form->get('items/id/post_value'));
+    $this->sql->set('account_capture_update/params/email/value', $form->get('items/email/post_value'));
+    $this->sql->set('account_capture_update/params/password/value', $form->get('items/password/post_value'));
+    $this->sql->set('account_capture_update/params/phone/value', $form->get('items/phone/post_value'));
+    $this->sql->set('account_capture_update/params/activated/value', $form->get('items/activated/post_value'));
+    $this->executeSQL($this->sql->get('account_capture_update'));
+    if(!$new){
+      return array("PluginWfAjax.update('account_base');$('#account_base_form').modal('hide');");
+    }else{
+      return array("PluginWfAjax.update('desktop_content');$('.modal').modal('hide');");
+    }
+  }
+  public function frm_account_role_form_capture($form){
+    $this->init();
+    if($form->get('items/id/post_value')){
+      $this->sql->set('account_role_update/params/id/value', $form->get('items/id/post_value'));
+      $this->sql->set('account_role_update/params/account_id/value', $form->get('items/account_id/post_value'));
+      $this->sql->set('account_role_update/params/role/value', $form->get('items/role/post_value'));
+      $this->executeSQL($this->sql->get('account_role_update'));
+    }else{
+      $this->sql->set('account_role_insert/params/account_id/value', $form->get('items/account_id/post_value'));
+      $this->sql->set('account_role_insert/params/role/value', $form->get('items/role/post_value'));
+      $this->executeSQL($this->sql->get('account_role_insert'));
+    }
+    return array("PluginWfAjax.update('account_roles');$('#account_role_form').modal('hide');");
+  }
+  public function page_account_delete(){
+    $this->init();
+    $page = $this->getYml('page/account_delete.yml');
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_delete_yes(){
+    $this->init();
+    $this->sql->set('account_delete/params/id/value', wfRequest::get('id'));
+    $rs = $this->executeSQL($this->sql->get('account_delete'));
+    exit('{success: true, message: "Account was deleted."}');
+  }
+  public function page_account_role_delete(){
+    $this->init();
+    $this->sql->set('account_role_delete/params/account_id/value', wfRequest::get('id'));
+    $this->sql->set('account_role_delete/params/id/value', wfRequest::get('role_id'));
+    $this->executeSQL($this->sql->get('account_role_delete'));
+    exit('{success: true, message: "Account role was deleted."}');
+  }
+  private function createAccount(){
+    $uid = wfCrypt::getUid();
+    $this->sql->set('account_capture_insert/params/id/value', $uid);
+    $this->executeSQL($this->sql->get('account_capture_insert'));
+    return $uid;
+  }
+  public function page_account_log(){
+    $this->init();
+    $page = $this->getYml('page/account_log.yml');
+    $this->sql->set('account_log/params/account_id/value', wfRequest::get('id'));
+    $rs = $this->executeSQL($this->sql->get('account_log'));
+    $trs = array();
+    foreach ($rs->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      $trs[] = wfDocument::createHtmlElement('tr', array(
+        wfDocument::createHtmlElement('td', $item->get('date')),
+        wfDocument::createHtmlElement('td', $item->get('type'))
+      ));
+    }
+    $page->setById('tbody_account_log', 'innerHTML', $trs);
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_roles(){
+    $this->init();
+    $this->sql->set('account_roles/params/account_id/value', wfRequest::get('id'));
+    $rs = $this->executeSQL($this->sql->get('account_roles'));
+    $trs = array();
+    foreach ($rs->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      $trs[] = wfDocument::createHtmlElement('tr', array(
+        wfDocument::createHtmlElement('td', $item->get('role'))
+      ), array('style' => 'cursor:pointer', 'onclick' => "PluginWfBootstrapjs.modal({id: 'account_role_form', url: '/'+app.class+'/account_role_form/id/'+app.account_id+'/role_id/".$item->get('id')."', lable: 'Role', size: 'sm'});"));
+    }
+    $page = $this->getYml('page/account_roles.yml');
+    $page->setById('tbody_account_role', 'innerHTML', $trs);
+    wfDocument::renderElement($page->get());
+  }
+  private function getYml($file){
+    return new PluginWfYml(wfArray::get($GLOBALS, 'sys/app_dir').'/plugin/account/admin_v1/'.$file);
+  }
+  private function runSQL($sql){
+    wfPlugin::includeonce('wf/mysql');
+    $mysql = new PluginWfMysql();
+    $mysql->open($this->settings->get('mysql'));
+    $test = $mysql->runSql($sql);
+    return new PluginWfArray($test['data']);
+  }
+  private function executeSQL($sql){
+    wfPlugin::includeonce('wf/mysql');
+    $mysql = new PluginWfMysql();
+    $mysql->open($this->settings->get('mysql'));
+    $mysql->execute($sql);
+    $record = new PluginWfArray($mysql->getStmtAsArray());
+    return $record;
+  }
+}

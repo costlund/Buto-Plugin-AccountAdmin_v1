@@ -1,0 +1,41 @@
+-
+  type: div
+  attribute:
+    class: row
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: col-sm-12
+      innerHTML:
+
+        -
+          type: p
+          innerHTML: 'Are you sure to delete this account?'
+        -
+          type: p
+          innerHTML:
+            -
+              type: span
+              attribute:
+                id: are_you_sure
+                style: 'display:none'
+              innerHTML: Are you sure?
+            -
+              type: button
+              attribute:
+                class: btn btn-warning
+                onclick: "if(confirm(  $('#are_you_sure').text()  )){ $.get('/'+app.class+'/account_delete_yes/id/'+app.account_id, function(){ PluginWfAjax.update('desktop_content');$('.modal').modal('hide'); });}"
+              innerHTML: Yes
+            -
+              type: button
+              attribute:
+                class: btn btn-default
+                data-dismiss: modal
+              innerHTML: No
+  
+  
+  
+  
+  
+#  if(confirm(' Är ni säker? ')){ $.get('/doc/pat_form_delete/module/guardian/action/form/pat_id/1/id/2', function(){PluginSitHavanna.pat_form_delete('guardian', 'form');});}

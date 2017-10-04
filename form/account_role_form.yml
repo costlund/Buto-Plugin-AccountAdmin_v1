@@ -1,0 +1,23 @@
+url: '/[class]/account_role_capture'
+ajax: true
+submit_value: Save
+id: frm_account_role_form
+items:
+  id:
+    type: hidden
+    label: ID
+  account_id:
+    type: hidden
+    label: Account ID
+  role:
+    type: varchar
+    label: Role
+    mandatory: true
+    info:
+      text: 'Read documentation about Buto roles for proper setup!'
+render:
+  plugin: 'account/admin_v1'
+  method: frm_account_role_form_render
+capture:
+  plugin: 'account/admin_v1'
+  method: frm_account_role_form_capture

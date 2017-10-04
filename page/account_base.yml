@@ -1,0 +1,168 @@
+-
+  type: table
+  attribute:
+    class: 'table'
+  innerHTML:
+    tbody:
+      type: tbody
+      innerHTML:
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: ID
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: id
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Email
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: email
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Password
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: password
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Phone
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: phone
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Activated
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: activated
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Activate key
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: activate_key
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Activate password
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: activate_password
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Activate date
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: activate_date
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Change email
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: change_email_email
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Change email key
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: change_email_key
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Change email date
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: change_email_date
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Two factor authentication key
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: two_factor_authentication_key
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Two factor authentication date
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: two_factor_authentication_date
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Cert ID
+            -
+              type: td
+              innerHTML: _
+              attribute:
+                id: cert_id
+
+
+
+
+
+

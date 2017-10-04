@@ -1,0 +1,19 @@
+settings:
+  path: 'container/innerHTML/row/innerHTML'
+content:
+  navbar:
+    type: div
+    innerHTML: 'yml:/plugin/account/admin_v1/html_object/bootstrap_navbar.yml:content'
+  container:
+    type: div
+    attribute:
+      class: 'container-fluid'
+      style: 'min-height:300px;'
+    innerHTML:
+      row:
+        type: div
+        attribute:
+          class: row
+          style: "padding:10px"
+    
+    

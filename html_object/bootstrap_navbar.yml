@@ -57,6 +57,22 @@ content:
                   -
                     type: a
                     attribute:
+                      onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
+                    innerHTML: Stat
+              -
+                type: li
+                innerHTML:
+                  -
+                    type: a
+                    attribute:
+                      onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
+                    innerHTML: Accounts
+              -
+                type: li
+                innerHTML:
+                  -
+                    type: a
+                    attribute:
                       onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: 'New account'});"
                     innerHTML: New account
             

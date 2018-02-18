@@ -14,5 +14,5 @@ content:
     innerHTML: _
   script:
     type: script
-    innerHTML: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
+    innerHTML: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
     

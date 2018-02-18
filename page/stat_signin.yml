@@ -1,0 +1,124 @@
+-
+  type: div
+  attribute:
+    class: row
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: col-md-6
+      innerHTML:
+        -
+          type: table
+          attribute:
+            class: table
+          innerHTML:
+            thead:
+              type: thead
+              innerHTML:
+                -
+                  type: tr
+                  innerHTML:
+                    -
+                      type: th
+                      innerHTML: Date
+                    -
+                      type: th
+                      innerHTML: 'Type'
+                    -
+                      type: th
+                      innerHTML: 'Email'
+            tbody:
+              type: tbody
+              attribute:
+                id: tbody
+              innerHTML:
+                -
+                  type: tr
+                  innerHTML:
+                    -
+                      type: td
+                      attribute:
+                        id: col_1
+                      innerHTML: '2001-01-01'
+                    -
+                      type: td
+                      attribute:
+                        id: col_2
+                      innerHTML: _
+                    -
+                      type: td
+                      attribute:
+                        id: col_3
+                      innerHTML: _
+    -
+      type: div
+      attribute:
+        class: col-md-6
+      innerHTML:
+        -
+          type: widget
+          attribute:
+            id: chart_signin
+          data:
+            plugin: 'chart/amcharts_v3'
+            method: serial
+            data:
+              mysql_conn: '_set_in_action_'
+              mysql_query: |
+                select 
+                left(date,10) as date, 
+                count(id) as antal
+                from account_log
+                where date>date_add(now(), INTERVAL -10 DAY)
+                group by left(date,10);
+              chart:
+                id: chart_signin
+                style: "width: 800px; height:600px;"
+                data:
+                  type: serial
+                  categoryField: date
+                  dataDateFormat: YYYY-MM-DD
+                  startDuration: 1
+                  categoryAxis:
+                    gridPosition: start
+                    parseDates: true
+                  chartCursor:
+                    enabled: true
+                  chartScrollbar:
+                    enabled: true
+                  trendLineszzz:
+                  "graphs":
+                    -
+                      id: "AmGraph-1"
+                      title: "Number"
+                      valueField: "antal"
+                      type: column
+                      fillAlphas: 1
+                  "guideszzz":
+                  "valueAxes":
+                    -
+                      "id": "ValueAxis-1"
+                      "title": "Sign in"
+                      integersOnly: true
+                  "allLabelszzz":
+                  "balloonzzz":
+                  titles:
+                    -
+                      id: "Title-1"
+                      size: 15
+                      text: "Sign in by date"
+                  dataProvider:
+                    -
+                      date: "2014-03-01"
+                      antal: 8
+                    -
+                      date: "2014-03-02"
+                      antal: 16
+                    -
+                      date: "2014-03-22"
+                      antal: 16
+                  legend:
+                    enabled: false
+                    useGraphSettings: true
+    

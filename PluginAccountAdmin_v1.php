@@ -21,7 +21,7 @@ class PluginAccountAdmin_v1{
     wfPlugin::includeonce('wf/yml');
     $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
     $this->settings->set('mysql', wfSettings::getSettingsFromYmlString($this->settings->get('mysql')));
-     $this->sql = wfSettings::getSettingsAsObject("/plugin/account/admin_v1/mysql/sql.yml");
+    $this->sql = wfSettings::getSettingsAsObject("/plugin/account/admin_v1/mysql/sql.yml");
   }
   public function page_desktop(){
     $this->init();
@@ -219,6 +219,31 @@ class PluginAccountAdmin_v1{
     $page = $this->getYml('page/account_roles.yml');
     $page->setById('tbody_account_role', 'innerHTML', $trs);
     wfDocument::renderElement($page->get());
+  }
+  public function page_stat_signin(){
+    $this->init();
+    $element = $this->getYml('page/stat_signin.yml');
+    
+    
+    $account_log = $this->getAccountLog();
+    $trs = array();
+    $tr = $element->getById('tbody', 'innerHTML/0');
+    foreach ($account_log->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      $tr->setById('col_1', 'innerHTML', $item->get('date'));
+      $tr->setById('col_2', 'innerHTML', $item->get('type'));
+      $tr->setById('col_3', 'innerHTML', $item->get('email'));
+      $trs[] = $tr->get();
+    }
+    $element->setById('tbody', 'innerHTML', $trs);
+    
+    
+    $element->setById('chart_signin', 'data/data/mysql_conn', $this->settings->get('mysql'));
+    wfDocument::renderElement($element->get());
+  }
+  private function getAccountLog(){
+    $rs = $this->runSQL("select l.date, l.type, a.email from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
+    return $rs;
   }
   private function getYml($file){
     return new PluginWfYml(wfArray::get($GLOBALS, 'sys/app_dir').'/plugin/account/admin_v1/'.$file);

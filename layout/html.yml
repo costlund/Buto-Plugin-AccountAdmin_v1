@@ -125,6 +125,13 @@ content:
               method: include
               data:
                 style: bootstrap
+          amcharts:
+            type: widget
+            data:
+              plugin: chart/amcharts_v3
+              method: include
+              data:
+                commercial_license_pathzzz: null
       body:
         type: body
         innerHTML: 'body...'

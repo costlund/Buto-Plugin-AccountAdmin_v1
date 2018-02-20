@@ -9,54 +9,6 @@
         class: col-md-6
       innerHTML:
         -
-          type: table
-          attribute:
-            class: table
-          innerHTML:
-            thead:
-              type: thead
-              innerHTML:
-                -
-                  type: tr
-                  innerHTML:
-                    -
-                      type: th
-                      innerHTML: Date
-                    -
-                      type: th
-                      innerHTML: 'Type'
-                    -
-                      type: th
-                      innerHTML: 'Email'
-            tbody:
-              type: tbody
-              attribute:
-                id: tbody
-              innerHTML:
-                -
-                  type: tr
-                  innerHTML:
-                    -
-                      type: td
-                      attribute:
-                        id: col_1
-                      innerHTML: '2001-01-01'
-                    -
-                      type: td
-                      attribute:
-                        id: col_2
-                      innerHTML: _
-                    -
-                      type: td
-                      attribute:
-                        id: col_3
-                      innerHTML: _
-    -
-      type: div
-      attribute:
-        class: col-md-6
-      innerHTML:
-        -
           type: widget
           attribute:
             id: chart_signin
@@ -74,7 +26,7 @@
                 group by left(date,10);
               chart:
                 id: chart_signin
-                style: "width: 800px; height:600px;"
+                style: "width:100%;height:300px;"
                 data:
                   type: serial
                   categoryField: date
@@ -121,4 +73,53 @@
                   legend:
                     enabled: false
                     useGraphSettings: true
+    -
+      type: div
+      attribute:
+        class: col-md-6
+      innerHTML:
+        -
+          type: table
+          attribute:
+            class: table
+          innerHTML:
+            thead:
+              type: thead
+              innerHTML:
+                -
+                  type: tr
+                  innerHTML:
+                    -
+                      type: th
+                      innerHTML: Date
+                    -
+                      type: th
+                      innerHTML: 'Type'
+                    -
+                      type: th
+                      innerHTML: 'Email'
+            tbody:
+              type: tbody
+              attribute:
+                id: tbody
+              innerHTML:
+                -
+                  type: tr
+                  innerHTML:
+                    -
+                      type: td
+                      attribute:
+                        id: col_1
+                      innerHTML: '2001-01-01'
+                    -
+                      type: td
+                      attribute:
+                        id: col_2
+                      innerHTML: _
+                    -
+                      type: td
+                      attribute:
+                        id: col_3
+                      innerHTML: _
+
     

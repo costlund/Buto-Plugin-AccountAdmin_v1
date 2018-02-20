@@ -12,13 +12,21 @@ class PluginAccountAdmin_v1{
       if(!wfUser::hasRole("webmaster")){
         exit('Role webmaster is required!');
       }
-      $GLOBALS['sys']['settings']['plugin']['datatable']['datatable_1_10_16']['enabled'] = 'true';
-      $GLOBALS['sys']['settings']['plugin']['wf']['form_v2']['enabled'] = 'true';
     }
   }
   private function init(){
     wfPlugin::includeonce('wf/array');
     wfPlugin::includeonce('wf/yml');
+    /**
+     * Enable plugins.
+     */
+    wfPlugin::enable('davegandy/fontawesome450');
+    wfPlugin::enable('wf/textareatab');
+    wfPlugin::enable('prism/prismjs');
+    wfPlugin::enable('wf/onkeypress');
+    /**
+     * 
+     */
     $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
     $this->settings->set('mysql', wfSettings::getSettingsFromYmlString($this->settings->get('mysql')));
     $this->sql = wfSettings::getSettingsAsObject("/plugin/account/admin_v1/mysql/sql.yml");

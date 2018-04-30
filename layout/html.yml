@@ -1,39 +1,5 @@
 settings:
   path: 'html/innerHTML/body/innerHTML'
-  rewrite_globals:
-    -
-      key: 'sys/settings/plugin/davegandy/fontawesome450/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/dom/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/bootstrap/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/ajax/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/samstephenson/prototype/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/textareatab/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/callbackjson/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/prism/prismjs/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/onkeypress/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/wf/bootstrapjs/enabled'
-      value: true
-    -
-      key: 'sys/settings/plugin/datatable/datatable_1_10_16/enabled'
-      value: true    
 content:
   doctype:
     type: text

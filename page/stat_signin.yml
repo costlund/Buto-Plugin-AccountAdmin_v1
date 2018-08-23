@@ -98,6 +98,9 @@
                     -
                       type: th
                       innerHTML: 'Email'
+                    -
+                      type: th
+                      innerHTML: 'Username'
             tbody:
               type: tbody
               attribute:
@@ -120,6 +123,11 @@
                       type: td
                       attribute:
                         id: col_3
+                      innerHTML: _
+                    -
+                      type: td
+                      attribute:
+                        id: col_4
                       innerHTML: _
 
     

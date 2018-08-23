@@ -25,6 +25,9 @@
                   innerHTML: 'Email'
                 -
                   type: th
+                  innerHTML: 'Username'
+                -
+                  type: th
                   innerHTML: 'Password'
                 -
                   type: th

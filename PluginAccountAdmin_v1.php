@@ -7,11 +7,14 @@
 class PluginAccountAdmin_v1{
   private $settings = null;
   private $sql = null;
+  private $i18n = null;
   function __construct($buto = false) {
     if($buto){
       if(!wfUser::hasRole("webmaster")){
         exit('Role webmaster is required!');
       }
+      wfPlugin::includeonce('i18n/translate_v1');
+      $this->i18n = new PluginI18nTranslate_v1();
     }
   }
   private function init(){
@@ -35,6 +38,10 @@ class PluginAccountAdmin_v1{
     $this->init();
     wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/account/admin_v1/layout');
     $page = $this->getYml('page/desktop.yml');
+    /**
+     * Insert admin layout from theme.
+     */
+    $page = wfDocument::insertAdminLayout($this->settings, 1, $page);
     $page->set('content/app/innerHTML', "var app = {class: '".wfArray::get($GLOBALS, 'sys/class')."'};");
     wfDocument::mergeLayout($page->get());
   }
@@ -47,6 +54,7 @@ class PluginAccountAdmin_v1{
       $item = new PluginWfArray($value);
       $trs[] = wfDocument::createHtmlElement('tr', array(
       wfDocument::createHtmlElement('td', $item->get('email')),
+      wfDocument::createHtmlElement('td', $item->get('username')),
       wfDocument::createHtmlElement('td', $item->get('password')),
       wfDocument::createHtmlElement('td', $item->get('activated')),
       wfDocument::createHtmlElement('td', $item->get('activate_key')),
@@ -76,9 +84,7 @@ class PluginAccountAdmin_v1{
     $rs = $this->executeSQL($this->sql->get('account'));
     if($rs){$rs = new PluginWfArray($rs->get('0'));}
     $page = $this->getYml('page/account_base.yml');
-    foreach ($rs->get() as $key => $value) {
-      $page->setById($key, 'innerHTML', $value);
-    }
+    $page->setByTag($rs->get());
     wfDocument::renderElement($page->get());
   }
   public function page_account_base_form(){
@@ -112,9 +118,13 @@ class PluginAccountAdmin_v1{
        */
       $form->set('items/id/default', wfRequest::get('id'));
       $form->set('items/email/default', $rs->get('email'));
+      $form->set('items/username/default', $rs->get('username'));
       $form->set('items/password/default', $rs->get('password'));
       $form->set('items/phone/default', $rs->get('phone'));
       $form->set('items/activated/default', $rs->get('activated'));
+    }else{
+      $form->set('items/username/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
+      $form->set('items/password/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
     }
     return $form;
   }
@@ -149,6 +159,7 @@ class PluginAccountAdmin_v1{
     }
     $this->sql->set('account_capture_update/params/id/value', $form->get('items/id/post_value'));
     $this->sql->set('account_capture_update/params/email/value', $form->get('items/email/post_value'));
+    $this->sql->set('account_capture_update/params/username/value', $form->get('items/username/post_value'));
     $this->sql->set('account_capture_update/params/password/value', $form->get('items/password/post_value'));
     $this->sql->set('account_capture_update/params/phone/value', $form->get('items/phone/post_value'));
     $this->sql->set('account_capture_update/params/activated/value', $form->get('items/activated/post_value'));
@@ -231,8 +242,6 @@ class PluginAccountAdmin_v1{
   public function page_stat_signin(){
     $this->init();
     $element = $this->getYml('page/stat_signin.yml');
-    
-    
     $account_log = $this->getAccountLog();
     $trs = array();
     $tr = $element->getById('tbody', 'innerHTML/0');
@@ -241,16 +250,15 @@ class PluginAccountAdmin_v1{
       $tr->setById('col_1', 'innerHTML', $item->get('date'));
       $tr->setById('col_2', 'innerHTML', $item->get('type'));
       $tr->setById('col_3', 'innerHTML', $item->get('email'));
+      $tr->setById('col_4', 'innerHTML', $item->get('username'));
       $trs[] = $tr->get();
     }
     $element->setById('tbody', 'innerHTML', $trs);
-    
-    
     $element->setById('chart_signin', 'data/data/mysql_conn', $this->settings->get('mysql'));
     wfDocument::renderElement($element->get());
   }
   private function getAccountLog(){
-    $rs = $this->runSQL("select l.date, l.type, a.email from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
+    $rs = $this->runSQL("select l.date, l.type, a.email, a.username from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
     return $rs;
   }
   private function getYml($file){
@@ -263,12 +271,61 @@ class PluginAccountAdmin_v1{
     $test = $mysql->runSql($sql);
     return new PluginWfArray($test['data']);
   }
-  private function executeSQL($sql){
+  private function executeSQL($sql, $one = false){
     wfPlugin::includeonce('wf/mysql');
     $mysql = new PluginWfMysql();
     $mysql->open($this->settings->get('mysql'));
     $mysql->execute($sql);
-    $record = new PluginWfArray($mysql->getStmtAsArray());
+    if($one){
+      $record = new PluginWfArray($mysql->getStmtAsArrayOne());
+    }else{
+      $record = new PluginWfArray($mysql->getStmtAsArray());
+    }
     return $record;
   }
+  public function validate_username_or_email($field, $form, $data = array()){
+    $form = new PluginWfArray($form);
+    if($form->get("items/$field/is_valid") && $form->get("items/$field/post_value")){
+      if($field=='username'){
+        $rs = $this->db_account_username_exist($form->get("items/id/post_value"), $form->get("items/$field/post_value"));
+      }elseif($field=='email'){
+        $rs = $this->db_account_email_exist($form->get("items/id/post_value"), $form->get("items/$field/post_value"));
+      }else{
+        throw new Exception("wrong field...");
+      }
+      $id = $form->get("items/id/post_value");
+      $value = $form->get("items/$field/post_value");
+      $error = false;
+      if($rs->get('id')){
+        if($id){
+          if($id != $rs->get('id')){
+            $error = true;
+          }
+        }else{
+          if($value == $rs->get($field)){
+            $error = true;
+          }
+        }
+      }
+      if($error){
+        $form->set("items/$field/is_valid", false);
+        $form->set("items/$field/errors/", $this->i18n->translateFromTheme('?label is already in use by other account!', array('?label' => $this->i18n->translateFromTheme($form->get("items/$field/label")))));
+      }
+    }
+    return $form->get();
+  }
+  private function db_account_username_exist($id, $username){
+    $this->init();
+    $this->sql->set('account_select_one_by_username/params/username/value', $username);
+    $rs = $this->executeSQL($this->sql->get('account_select_one_by_username'), true);
+    return $rs;
+  }
+  private function db_account_email_exist($id, $email){
+    $this->init();
+    $this->sql->set('account_select_one_by_email/params/email/value', $email);
+    $rs = $this->executeSQL($this->sql->get('account_select_one_by_email'), true);
+    return $rs;
+  }
+  
+  
 }

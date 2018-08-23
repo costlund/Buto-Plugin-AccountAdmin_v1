@@ -1,11 +1,12 @@
 accounts:
   sql: |
-    select id,email,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
+    select id,email,username,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
     from account
     order by email;
   select:
     - id
     - email
+    - username
     - password
     - activated
     - activate_key
@@ -20,13 +21,19 @@ accounts:
     - cert_id
 account:
   sql: |
-    select id,email,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
+    select 
+    id,email,username,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id,
+    created_by,
+    updated_by,
+    created_at,
+    updated_at
     from account
     where id=?
     ;
   select:
     - id
     - email
+    - username
     - password
     - activated
     - activate_key
@@ -39,9 +46,43 @@ account:
     - two_factor_authentication_key
     - two_factor_authentication_date
     - cert_id
+    - created_by
+    - updated_by
+    - created_at
+    - updated_at
   params:
     account_id:
       type: s
+account_select_one_by_username:
+  sql: |
+    select 
+    id,
+    username
+    from account
+    where username=?
+    ;
+  select:
+    - id
+    - username
+  params:
+    username:
+      type: s
+      value: _
+account_select_one_by_email:
+  sql: |
+    select 
+    id,
+    email
+    from account
+    where email=?
+    ;
+  select:
+    - id
+    - email
+  params:
+    email:
+      type: s
+      value: _
 account_log:
   sql: "select type, date from account_log where account_id=? order by date desc;"
   select:
@@ -91,9 +132,11 @@ account_role_delete:
     account_id:
       type: s
 account_capture_update:
-  sql: "update account set email=?, password=?, phone=?, activated=? where id=?;"
+  sql: "update account set email=?, username=?, password=?, phone=?, activated=?, updated_by='[user_id]', updated_at=now() where id=?;"
   params:
     email:
+      type: s
+    username:
       type: s
     password:
       type: s
@@ -104,7 +147,7 @@ account_capture_update:
     id:
       type: s
 account_capture_insert:
-  sql: "insert into account (id) values (?);"
+  sql: "insert into account (id, created_by) values (?, '[user_id]');"
   params:
     id:
       type: s

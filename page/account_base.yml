@@ -14,9 +14,7 @@
               innerHTML: ID
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: id
+              innerHTML: rs:id
         -
           type: tr
           innerHTML:
@@ -25,9 +23,16 @@
               innerHTML: Email
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: email
+              innerHTML: rs:email
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Username
+            -
+              type: td
+              innerHTML: rs:username
         -
           type: tr
           innerHTML:
@@ -36,9 +41,7 @@
               innerHTML: Password
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: password
+              innerHTML: rs:password
         -
           type: tr
           innerHTML:
@@ -47,9 +50,7 @@
               innerHTML: Phone
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: phone
+              innerHTML: rs:phone
         -
           type: tr
           innerHTML:
@@ -58,9 +59,7 @@
               innerHTML: Activated
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: activated
+              innerHTML: rs:activated
         -
           type: tr
           innerHTML:
@@ -69,9 +68,7 @@
               innerHTML: Activate key
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: activate_key
+              innerHTML: rs:activate_key
         -
           type: tr
           innerHTML:
@@ -80,9 +77,7 @@
               innerHTML: Activate password
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: activate_password
+              innerHTML: rs:activate_password
         -
           type: tr
           innerHTML:
@@ -91,9 +86,7 @@
               innerHTML: Activate date
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: activate_date
+              innerHTML: rs:activate_date
         -
           type: tr
           innerHTML:
@@ -102,9 +95,7 @@
               innerHTML: Change email
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: change_email_email
+              innerHTML: rs:change_email_email
         -
           type: tr
           innerHTML:
@@ -113,9 +104,7 @@
               innerHTML: Change email key
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: change_email_key
+              innerHTML: rs:change_email_key
         -
           type: tr
           innerHTML:
@@ -124,9 +113,7 @@
               innerHTML: Change email date
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: change_email_date
+              innerHTML: rs:change_email_date
         -
           type: tr
           innerHTML:
@@ -135,9 +122,7 @@
               innerHTML: Two factor authentication key
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: two_factor_authentication_key
+              innerHTML: rs:two_factor_authentication_key
         -
           type: tr
           innerHTML:
@@ -146,9 +131,7 @@
               innerHTML: Two factor authentication date
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: two_factor_authentication_date
+              innerHTML: rs:two_factor_authentication_date
         -
           type: tr
           innerHTML:
@@ -157,12 +140,40 @@
               innerHTML: Cert ID
             -
               type: td
-              innerHTML: _
-              attribute:
-                id: cert_id
-
-
-
-
-
-
+              innerHTML: rs:cert_id
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Created at
+            -
+              type: td
+              innerHTML: rs:created_at
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Updated at
+            -
+              type: td
+              innerHTML: rs:updated_at
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Created by
+            -
+              type: td
+              innerHTML: rs:created_by
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Updated by
+            -
+              type: td
+              innerHTML: rs:updated_by

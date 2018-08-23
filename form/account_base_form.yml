@@ -14,6 +14,17 @@ items:
       -
         plugin: wf/form_v2
         method: validate_email
+      -
+        plugin: account/admin_v1
+        method: validate_username_or_email
+  username:
+    type: varchar
+    label: Username
+    mandatory: true
+    validator:
+      -
+        plugin: account/admin_v1
+        method: validate_username_or_email
   password:
     type: varchar
     label: Password

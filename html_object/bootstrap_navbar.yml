@@ -36,7 +36,7 @@ content:
             type: a
             attribute:
               class: navbar-brand
-              href: '/'
+              onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
             innerHTML: AccountAdmin_v1
       2:
         type: div
@@ -51,14 +51,6 @@ content:
             attribute:
               class: 'nav navbar-nav'
             innerHTML:
-              -
-                type: li
-                innerHTML:
-                  -
-                    type: a
-                    attribute:
-                      onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
-                    innerHTML: Stat
               -
                 type: li
                 innerHTML:

@@ -3,6 +3,8 @@ settings:
 content:
   navbar:
     type: div
+    attribute:
+      class: 'container-fluid'
     innerHTML: 'yml:/plugin/account/admin_v1/html_object/bootstrap_navbar.yml:content'
   container:
     type: div

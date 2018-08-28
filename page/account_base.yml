@@ -59,7 +59,7 @@
               innerHTML: Activated
             -
               type: td
-              innerHTML: rs:activated
+              innerHTML: rs:activated_text
         -
           type: tr
           innerHTML:

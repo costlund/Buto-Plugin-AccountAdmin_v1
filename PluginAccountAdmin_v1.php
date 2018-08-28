@@ -10,8 +10,8 @@ class PluginAccountAdmin_v1{
   private $i18n = null;
   function __construct($buto = false) {
     if($buto){
-      if(!wfUser::hasRole("webmaster")){
-        exit('Role webmaster is required!');
+      if(!wfUser::hasRole("webadmin")){
+        exit('Role webadmin is required!');
       }
       wfPlugin::includeonce('i18n/translate_v1');
       $this->i18n = new PluginI18nTranslate_v1();
@@ -53,22 +53,20 @@ class PluginAccountAdmin_v1{
     $trs = array();
     foreach ($rs->get() as $key => $value) {
       $item = new PluginWfArray($value);
+      $onclick = "PluginAccountAdmin_v1.account_view('".$item->get('id')."');";
       $trs[] = wfDocument::createHtmlElement('tr', array(
       wfDocument::createHtmlElement('td', $item->get('email')),
       wfDocument::createHtmlElement('td', $item->get('username')),
-      wfDocument::createHtmlElement('td', $item->get('password')),
       wfDocument::createHtmlElement('td', $item->get('activated')),
-      wfDocument::createHtmlElement('td', $item->get('activate_key')),
-      wfDocument::createHtmlElement('td', $item->get('activate_password')),
       wfDocument::createHtmlElement('td', $item->get('activate_date')),
-      wfDocument::createHtmlElement('td', $item->get('change_email_email')),
-      wfDocument::createHtmlElement('td', $item->get('change_email_key')),
       wfDocument::createHtmlElement('td', $item->get('change_email_date')),
       wfDocument::createHtmlElement('td', $item->get('phone')),
-      wfDocument::createHtmlElement('td', $item->get('two_factor_authentication_key')),
       wfDocument::createHtmlElement('td', $item->get('two_factor_authentication_date')),
-      wfDocument::createHtmlElement('td', $item->get('cert_id'))
-      ), array('style' => 'cursor:pointer', 'onclick' => "PluginWfBootstrapjs.modal({id: 'account_view', url: '/'+app.class+'/account_view/id/".$item->get('id')."', lable: 'Account', size: 'lg'});"));
+      wfDocument::createHtmlElement('td', $item->get('created_at')),
+      wfDocument::createHtmlElement('td', $item->get('updated_at')),
+      wfDocument::createHtmlElement('td', $item->get('roles')),
+      wfDocument::createHtmlElement('td', $item->get('log_date'))
+      ), array('style' => 'cursor:pointer', 'onclick' => $onclick));
     }
     $page->setById('tbody', 'innerHTML', $trs);
     wfDocument::renderElement($page->get());
@@ -137,13 +135,18 @@ class PluginAccountAdmin_v1{
       /**
        * Get account data.
        */
-      $this->sql->set('account_role/params/id/value', wfRequest::get('role_id'));
-      $this->sql->set('account_role/params/account_id/value', wfRequest::get('id'));
-      $rs = $this->executeSQL($this->sql->get('account_role'));
-      if($rs){$rs = new PluginWfArray($rs->get('0'));}
+      $rs = $this->db_role_select_one(wfRequest::get('role_id'));
       $form->set('items/role/default', $rs->get('role'));
     }
     return $form;
+  }
+  private function db_role_select_one($id){
+    $this->sql->set('account_role/params/id/value', $id);
+    $rs = $this->executeSQL($this->sql->get('account_role'));
+    if($rs){
+      $rs = new PluginWfArray($rs->get('0'));
+    }
+    return $rs;
   }
   public function page_account_base_capture(){
     $widget = wfDocument::createWidget('wf/form_v2', 'capture', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
@@ -156,7 +159,8 @@ class PluginAccountAdmin_v1{
       $new = false;
     }
     if($new){
-      $form->set('items/id/post_value', $this->createAccount());
+      $id = $this->createAccount();
+      $form->set('items/id/post_value', $id);
     }
     $this->sql->set('account_capture_update/params/id/value', $form->get('items/id/post_value'));
     $this->sql->set('account_capture_update/params/email/value', $form->get('items/email/post_value'));
@@ -168,7 +172,7 @@ class PluginAccountAdmin_v1{
     if(!$new){
       return array("PluginWfAjax.update('account_base');$('#account_base_form').modal('hide');");
     }else{
-      return array("PluginWfAjax.update('desktop_content');$('.modal').modal('hide');");
+      return array("PluginWfAjax.update('desktop_content');$('.modal').modal('hide');PluginAccountAdmin_v1.account_view('$id');");
     }
   }
   public function frm_account_role_form_capture($form){
@@ -198,6 +202,10 @@ class PluginAccountAdmin_v1{
   }
   public function page_account_role_delete(){
     $this->init();
+    $rs = $this->db_role_select_one(wfRequest::get('role_id'));
+    if($rs && $rs->get('role')=='webmaster' && !wfUser::hasRole('webmaster')){
+      exit('{success: false, message: "Account role webmaster can only be handled by Webmaster."}');
+    }
     $this->sql->set('account_role_delete/params/account_id/value', wfRequest::get('id'));
     $this->sql->set('account_role_delete/params/id/value', wfRequest::get('role_id'));
     $this->executeSQL($this->sql->get('account_role_delete'));
@@ -315,6 +323,32 @@ class PluginAccountAdmin_v1{
     }
     return $form->get();
   }
+  /**
+   * Form validator.
+   * Validate if role webmaster are handled by user with no webmaster role.
+   */
+  public function validate_role($field, $form, $data = array()){
+    $this->init();
+    $form = new PluginWfArray($form);
+    if($form->get("items/$field/is_valid") && $form->get("items/$field/post_value")){
+      $error = false;
+      if(!wfRequest::get('id')){
+        if(!wfUser::hasRole('webmaster') && wfRequest::get('role') == 'webmaster'){
+          $error = true;
+        }
+      }else{
+        $rs = $this->db_role_select_one(wfRequest::get('id'));
+        if($rs && $rs->get('role')=='webmaster'){
+          $error = true;
+        }
+      }
+      if($error){
+        $form->set("items/$field/is_valid", false);
+        $form->set("items/$field/errors/", $this->i18n->translateFromTheme('?label webmaster can only be handled by Webmaster!', array('?label' => $this->i18n->translateFromTheme($form->get("items/$field/label")))));
+      }
+    }
+    return $form->get();
+  }
   private function db_account_username_exist($id, $username){
     $this->init();
     $this->sql->set('account_select_one_by_username/params/username/value', $username);
@@ -327,6 +361,4 @@ class PluginAccountAdmin_v1{
     $rs = $this->executeSQL($this->sql->get('account_select_one_by_email'), true);
     return $rs;
   }
-  
-  
 }

@@ -98,6 +98,13 @@ content:
               method: include
               data:
                 commercial_license_pathzzz: null
+          embed_js:
+            type: widget
+            data:
+              plugin: 'wf/embed'
+              method: js
+              data:
+                file: /plugin/account/admin_v1/js/function.js                
       body:
         type: body
         innerHTML: 'body...'

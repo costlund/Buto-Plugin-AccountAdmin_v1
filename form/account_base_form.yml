@@ -9,7 +9,7 @@ items:
   email:
     type: varchar
     label: Email
-    mandatory: true
+    mandatory: false
     validator:
       -
         plugin: wf/form_v2

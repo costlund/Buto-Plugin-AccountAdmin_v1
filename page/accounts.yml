@@ -28,25 +28,10 @@
                   innerHTML: 'Username'
                 -
                   type: th
-                  innerHTML: 'Password'
-                -
-                  type: th
                   innerHTML: 'Activated'
                 -
                   type: th
-                  innerHTML: 'Activated key'
-                -
-                  type: th
-                  innerHTML: 'Activated password'
-                -
-                  type: th
                   innerHTML: 'Activated date'
-                -
-                  type: th
-                  innerHTML: 'Change email'
-                -
-                  type: th
-                  innerHTML: 'Change email key'
                 -
                   type: th
                   innerHTML: 'Change email date'
@@ -55,13 +40,20 @@
                   innerHTML: 'Phone'
                 -
                   type: th
-                  innerHTML: 'TFA key'
-                -
-                  type: th
                   innerHTML: 'TFA date'
                 -
                   type: th
-                  innerHTML: 'Cert ID'
+                  innerHTML: 'Created at'
+                -
+                  type: th
+                  innerHTML: 'Updated at'
+                -
+                  type: th
+                  innerHTML: 'Roles'
+                -
+                  type: th
+                  innerHTML: 'Log date'
+                  
         tbody:
           type: tbody
           attribute:

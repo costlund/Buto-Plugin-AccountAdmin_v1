@@ -14,7 +14,11 @@ items:
     label: Role
     mandatory: true
     info:
-      text: 'Read documentation about Buto roles for proper setup!'
+      text: 'Read documentation about Buto roles for proper setup! Only Webmaster can apply webmaster role.'
+    validator:
+      -
+        plugin: account/admin_v1
+        method: validate_role
 render:
   plugin: 'account/admin_v1'
   method: frm_account_role_form_render

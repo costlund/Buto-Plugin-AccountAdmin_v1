@@ -1,8 +1,29 @@
 accounts:
   sql: |
-    select id,email,username,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id
-    from account
-    order by email;
+    select 
+    a.id,
+    a.email,
+    a.username,
+    a.password,
+    if(a.activated=1, 'Yes', 'No') as activated,
+    a.activate_key,
+    a.activate_password,
+    date_format(a.activate_date, '%y%m%d %H:%i') as activate_date,
+    a.change_email_email,
+    a.change_email_key,
+    date_format(a.change_email_date, '%y%m%d %H:%i') as change_email_date,
+    a.phone,
+    a.two_factor_authentication_key,
+    date_format(a.two_factor_authentication_date, '%y%m%d %H:%i') as two_factor_authentication_date,
+    a.cert_id,
+    a.created_by,
+    a.updated_by,
+    date_format(a.created_at, '%y%m%d %H:%i') as created_at,
+    date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
+    (select group_concat(role separator ', ') from account_role where account_id=a.id) as roles,
+    (select date_format(date, '%y%m%d %H:%i') from account_log where account_id=a.id order by date desc limit 1) as log_date
+    from account as a
+    order by a.email;
   select:
     - id
     - email
@@ -19,16 +40,37 @@ accounts:
     - two_factor_authentication_key
     - two_factor_authentication_date
     - cert_id
+    - created_by
+    - updated_by
+    - created_at
+    - updated_at
+    - roles
+    - log_date
 account:
   sql: |
     select 
-    id,email,username,password,activated,activate_key,activate_password,activate_date,change_email_email,change_email_key,change_email_date,phone,two_factor_authentication_key,two_factor_authentication_date,cert_id,
-    created_by,
-    updated_by,
-    created_at,
-    updated_at
-    from account
-    where id=?
+    a.id,
+    a.email,
+    a.username,
+    a.password,
+    a.activated,
+    if(a.activated=1, 'Yes', 'No') as activated_text,
+    a.activate_key,
+    a.activate_password,
+    a.activate_date,
+    a.change_email_email,
+    a.change_email_key,
+    a.change_email_date,
+    a.phone,
+    a.two_factor_authentication_key,
+    a.two_factor_authentication_date,
+    a.cert_id,
+    (select concat(id, ', ', COALESCE(email,''), ', ', COALESCE(username,'')) from account where id=a.created_by) as created_by,
+    (select concat(id, ', ', COALESCE(email,''), ', ', COALESCE(username,'')) from account where id=a.updated_by) as updated_by,
+    a.created_at,
+    a.updated_at
+    from account as a
+    where a.id=?
     ;
   select:
     - id
@@ -36,6 +78,7 @@ account:
     - username
     - password
     - activated
+    - activated_text
     - activate_key
     - activate_password
     - activate_date
@@ -100,14 +143,12 @@ account_roles:
     account_id:
       type: s
 account_role:
-  sql: "select role from account_role where id=? and account_id=?;"
+  sql: "select role from account_role where id=?;"
   select:
     - role
   params:
     id:
       type: i
-    account_id:
-      type: s
 account_role_update:
   sql: "update account_role set role=? where id=? and account_id=?;"
   params:

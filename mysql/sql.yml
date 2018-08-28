@@ -57,18 +57,18 @@ account:
     if(a.activated=1, 'Yes', 'No') as activated_text,
     a.activate_key,
     a.activate_password,
-    a.activate_date,
+    date_format(a.activate_date, '%y%m%d %H:%i') as activate_date,
     a.change_email_email,
     a.change_email_key,
-    a.change_email_date,
+    date_format(a.change_email_date, '%y%m%d %H:%i') as change_email_date,
     a.phone,
     a.two_factor_authentication_key,
-    a.two_factor_authentication_date,
+    date_format(a.two_factor_authentication_date, '%y%m%d %H:%i') as two_factor_authentication_date,
     a.cert_id,
-    (select concat(id, ', ', COALESCE(email,''), ', ', COALESCE(username,'')) from account where id=a.created_by) as created_by,
-    (select concat(id, ', ', COALESCE(email,''), ', ', COALESCE(username,'')) from account where id=a.updated_by) as updated_by,
-    a.created_at,
-    a.updated_at
+    (select concat('id:', id, ', email:', COALESCE(email,''), ', username:', COALESCE(username,'')) from account where id=a.created_by) as created_by,
+    (select concat('id:', id, ', email:', COALESCE(email,''), ', username:', COALESCE(username,'')) from account where id=a.updated_by) as updated_by,
+    date_format(a.created_at, '%y%m%d %H:%i') as created_at,
+    date_format(a.updated_at, '%y%m%d %H:%i') as updated_at
     from account as a
     where a.id=?
     ;

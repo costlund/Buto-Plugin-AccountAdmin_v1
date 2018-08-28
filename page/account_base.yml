@@ -15,18 +15,12 @@
             -
               type: td
               innerHTML: rs:id
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Email
             -
               type: td
               innerHTML: rs:email
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Username
@@ -42,18 +36,12 @@
             -
               type: td
               innerHTML: rs:password
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Phone
             -
               type: td
               innerHTML: rs:phone
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Activated
@@ -69,18 +57,12 @@
             -
               type: td
               innerHTML: rs:activate_key
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Activate password
             -
               type: td
               innerHTML: rs:activate_password
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Activate date
@@ -96,18 +78,12 @@
             -
               type: td
               innerHTML: rs:change_email_email
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Change email key
             -
               type: td
               innerHTML: rs:change_email_key
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Change email date
@@ -123,18 +99,12 @@
             -
               type: td
               innerHTML: rs:two_factor_authentication_key
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Two factor authentication date
             -
               type: td
               innerHTML: rs:two_factor_authentication_date
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Cert ID
@@ -150,18 +120,12 @@
             -
               type: td
               innerHTML: rs:created_at
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Updated at
             -
               type: td
               innerHTML: rs:updated_at
-        -
-          type: tr
-          innerHTML:
             -
               type: th
               innerHTML: Created by

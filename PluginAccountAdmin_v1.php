@@ -15,6 +15,7 @@ class PluginAccountAdmin_v1{
       }
       wfPlugin::includeonce('i18n/translate_v1');
       $this->i18n = new PluginI18nTranslate_v1();
+      wfPlugin::enable('wf/form_v2');
     }
   }
   private function init(){

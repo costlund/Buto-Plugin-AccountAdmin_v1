@@ -28,6 +28,11 @@ class PluginAccountAdmin_v1{
     wfPlugin::enable('prism/prismjs');
     wfPlugin::enable('wf/onkeypress');
     wfPlugin::enable('chart/amcharts_v3');
+    wfPlugin::enable('wf/bootstrapjs');
+    wfPlugin::enable('wf/dom');
+    wfPlugin::enable('wf/callbackjson');
+    wfPlugin::enable('datatable/datatable_1_10_16');
+    wfPlugin::enable('wf/embed');
     /**
      * 
      */

@@ -16,6 +16,12 @@
             -
               type: th
               innerHTML: 'Type'
+            -
+              type: th
+              innerHTML: 'User agent'
+            -
+              type: th
+              innerHTML: 'IP'
     tbody:
       type: tbody
       attribute: {id: tbody_account_log}

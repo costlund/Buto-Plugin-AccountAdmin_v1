@@ -16,7 +16,7 @@
     -
       type: div
       attribute:
-        class: col-sm-8
+        class: col-sm-12
       innerHTML:
         -
           type: h2
@@ -44,7 +44,7 @@
     -
       type: div
       attribute:
-        class: col-sm-8
+        class: col-sm-9
       innerHTML:
         -
           type: div
@@ -67,7 +67,7 @@
     -
       type: div
       attribute:
-        class: col-sm-4
+        class: col-sm-3
         style: "min-height:600px;"
       innerHTML:
         -

@@ -233,7 +233,9 @@ class PluginAccountAdmin_v1{
       $item = new PluginWfArray($value);
       $trs[] = wfDocument::createHtmlElement('tr', array(
         wfDocument::createHtmlElement('td', $item->get('date')),
-        wfDocument::createHtmlElement('td', $item->get('type'))
+        wfDocument::createHtmlElement('td', $item->get('type')),
+        wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
+        wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR'))
       ));
     }
     $page->setById('tbody_account_log', 'innerHTML', $trs);

@@ -127,10 +127,12 @@ account_select_one_by_email:
       type: s
       value: _
 account_log:
-  sql: "select type, date from account_log where account_id=? order by date desc;"
+  sql: "select type, date, HTTP_USER_AGENT, REMOTE_ADDR from account_log where account_id=? order by date desc;"
   select:
     - type
     - date
+    - HTTP_USER_AGENT
+    - REMOTE_ADDR
   params:
     account_id:
       type: s

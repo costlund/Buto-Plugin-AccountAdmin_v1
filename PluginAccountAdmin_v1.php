@@ -71,7 +71,8 @@ class PluginAccountAdmin_v1{
       wfDocument::createHtmlElement('td', $item->get('created_at')),
       wfDocument::createHtmlElement('td', $item->get('updated_at')),
       wfDocument::createHtmlElement('td', $item->get('roles')),
-      wfDocument::createHtmlElement('td', $item->get('log_date'))
+      wfDocument::createHtmlElement('td', $item->get('log_date')),
+      wfDocument::createHtmlElement('td', $item->get('session_id'))
       ), array('style' => 'cursor:pointer', 'onclick' => $onclick));
     }
     $page->setById('tbody', 'innerHTML', $trs);
@@ -85,12 +86,37 @@ class PluginAccountAdmin_v1{
   }
   public function page_account_base(){
     $this->init();
-    $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
-    $rs = $this->executeSQL($this->sql->get('account'));
-    if($rs){$rs = new PluginWfArray($rs->get('0'));}
+    $rs = $this->getAccount();
     $page = $this->getYml('page/account_base.yml');
     $page->setByTag($rs->get());
     wfDocument::renderElement($page->get());
+  }
+  private function getAccount(){
+    $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
+    $rs = $this->executeSQL($this->sql->get('account'));
+    if($rs){
+      $rs = new PluginWfArray($rs->get('0'));
+      
+      
+      if($this->getSessionFileExist($rs->get('session_id'))){
+        $rs->set('session_file_exist', true);
+        $rs->set('session_file_exist_text', 'Yes');
+      }else{
+        $rs->set('session_file_exist', false);
+        $rs->set('session_file_exist_text', 'No');
+      }
+      
+      return $rs;
+    }else{
+      return null;
+    }
+  }
+  private function getSessionFilename($session_id){
+    return ini_get('session.save_path').'/sess_'.$session_id;
+  }
+  private function getSessionFileExist($session_id){
+    $session_filename = $this->getSessionFilename($session_id);
+    return wfFilesystem::fileExist($session_filename);
   }
   public function page_account_base_form(){
     $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
@@ -115,9 +141,7 @@ class PluginAccountAdmin_v1{
       /**
        * Get account data.
        */
-      $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
-      $rs = $this->executeSQL($this->sql->get('account'));
-      if($rs){$rs = new PluginWfArray($rs->get('0'));}
+      $rs = $this->getAccount();
       /**
        * Set form.
        */
@@ -235,7 +259,8 @@ class PluginAccountAdmin_v1{
         wfDocument::createHtmlElement('td', $item->get('date')),
         wfDocument::createHtmlElement('td', $item->get('type')),
         wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
-        wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR'))
+        wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR')),
+        wfDocument::createHtmlElement('td', $item->get('session_id'))
       ));
     }
     $page->setById('tbody_account_log', 'innerHTML', $trs);
@@ -268,6 +293,7 @@ class PluginAccountAdmin_v1{
       $tr->setById('col_2', 'innerHTML', $item->get('type'));
       $tr->setById('col_3', 'innerHTML', $item->get('email'));
       $tr->setById('col_4', 'innerHTML', $item->get('username'));
+      $tr->setById('col_5', 'innerHTML', $item->get('session_id'));
       $trs[] = $tr->get();
     }
     $element->setById('tbody', 'innerHTML', $trs);
@@ -275,7 +301,7 @@ class PluginAccountAdmin_v1{
     wfDocument::renderElement($element->get());
   }
   private function getAccountLog(){
-    $rs = $this->runSQL("select l.date, l.type, a.email, a.username from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
+    $rs = $this->runSQL("select l.date, l.type, a.email, a.username, l.session_id from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
     return $rs;
   }
   private function getYml($file){

@@ -101,6 +101,9 @@
                     -
                       type: th
                       innerHTML: 'Username'
+                    -
+                      type: th
+                      innerHTML: 'Session ID'
             tbody:
               type: tbody
               attribute:
@@ -128,6 +131,11 @@
                       type: td
                       attribute:
                         id: col_4
+                      innerHTML: _
+                    -
+                      type: td
+                      attribute:
+                        id: col_5
                       innerHTML: _
 
     

@@ -53,6 +53,9 @@
                 -
                   type: th
                   innerHTML: 'Log date'
+                -
+                  type: th
+                  innerHTML: 'Session ID'
                   
         tbody:
           type: tbody

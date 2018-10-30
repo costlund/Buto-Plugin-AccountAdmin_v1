@@ -141,3 +141,15 @@
             -
               type: td
               innerHTML: rs:updated_by
+            -
+              type: th
+              innerHTML: Session ID
+            -
+              type: td
+              innerHTML: rs:session_id
+            -
+              type: th
+              innerHTML: Session file exist
+            -
+              type: td
+              innerHTML: rs:session_file_exist_text

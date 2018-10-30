@@ -21,7 +21,8 @@ accounts:
     date_format(a.created_at, '%y%m%d %H:%i') as created_at,
     date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
     (select group_concat(role separator ', ') from account_role where account_id=a.id) as roles,
-    (select date_format(date, '%y%m%d %H:%i') from account_log where account_id=a.id order by date desc limit 1) as log_date
+    (select date_format(date, '%y%m%d %H:%i') from account_log where account_id=a.id order by date desc limit 1) as log_date,
+    (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id
     from account as a
     order by a.email;
   select:
@@ -46,6 +47,7 @@ accounts:
     - updated_at
     - roles
     - log_date
+    - session_id
 account:
   sql: |
     select 
@@ -68,7 +70,8 @@ account:
     (select concat('id:', id, ', email:', COALESCE(email,''), ', username:', COALESCE(username,'')) from account where id=a.created_by) as created_by,
     (select concat('id:', id, ', email:', COALESCE(email,''), ', username:', COALESCE(username,'')) from account where id=a.updated_by) as updated_by,
     date_format(a.created_at, '%y%m%d %H:%i') as created_at,
-    date_format(a.updated_at, '%y%m%d %H:%i') as updated_at
+    date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
+    (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id
     from account as a
     where a.id=?
     ;
@@ -93,6 +96,7 @@ account:
     - updated_by
     - created_at
     - updated_at
+    - session_id
   params:
     account_id:
       type: s
@@ -127,12 +131,13 @@ account_select_one_by_email:
       type: s
       value: _
 account_log:
-  sql: "select type, date, HTTP_USER_AGENT, REMOTE_ADDR from account_log where account_id=? order by date desc;"
+  sql: "select type, date, HTTP_USER_AGENT, REMOTE_ADDR, session_id from account_log where account_id=? order by date desc;"
   select:
     - type
     - date
     - HTTP_USER_AGENT
     - REMOTE_ADDR
+    - session_id
   params:
     account_id:
       type: s

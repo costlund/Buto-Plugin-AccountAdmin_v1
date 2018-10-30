@@ -22,6 +22,9 @@
             -
               type: th
               innerHTML: 'IP'
+            -
+              type: th
+              innerHTML: 'Session ID'
     tbody:
       type: tbody
       attribute: {id: tbody_account_log}

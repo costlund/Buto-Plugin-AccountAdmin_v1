@@ -91,13 +91,29 @@ class PluginAccountAdmin_v1{
     $page->setByTag($rs->get());
     wfDocument::renderElement($page->get());
   }
+  public function page_account_session_content(){
+    $this->init();
+    $rs = $this->getAccount();
+    $rs->set('session_content_text', wfHelp::getYmlDump($rs->get('session_content')));
+    $page = $this->getYml('page/account_session_content.yml');
+    $page->setByTag($rs->get());
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_session_delete(){
+    $this->init();
+    $rs = $this->getAccount();
+    if($rs->get('session_file_exist')){
+      wfFilesystem::delete($rs->get('session_filename'));
+    }
+    $page = $this->getYml('page/account_session_delete.yml');
+    $page->setByTag($rs->get());
+    wfDocument::renderElement($page->get());
+  }
   private function getAccount(){
     $this->sql->set('account/params/account_id/value', wfRequest::get('id'));
     $rs = $this->executeSQL($this->sql->get('account'));
     if($rs){
       $rs = new PluginWfArray($rs->get('0'));
-      
-      
       if($this->getSessionFileExist($rs->get('session_id'))){
         $rs->set('session_file_exist', true);
         $rs->set('session_file_exist_text', 'Yes');
@@ -105,18 +121,34 @@ class PluginAccountAdmin_v1{
         $rs->set('session_file_exist', false);
         $rs->set('session_file_exist_text', 'No');
       }
-      
+      $rs->set('session_filename', $this->getSessionFilename($rs->get('session_id')));
+      if($rs->get('session_file_exist')){
+        $content = file_get_contents($rs->get('session_filename'));
+        wfPlugin::includeonce('session/reader');
+        $content = PluginSessionReader::unserialize($content);
+        $rs->set('session_content', $content);
+      }else{
+        $rs->set('session_content', null);
+      }
       return $rs;
     }else{
       return null;
     }
   }
   private function getSessionFilename($session_id){
-    return ini_get('session.save_path').'/sess_'.$session_id;
+    if($session_id){
+      return ini_get('session.save_path').'/sess_'.$session_id;
+    }else{
+      return null;
+    }
   }
   private function getSessionFileExist($session_id){
-    $session_filename = $this->getSessionFilename($session_id);
-    return wfFilesystem::fileExist($session_filename);
+    if($session_id){
+      $session_filename = $this->getSessionFilename($session_id);
+      return wfFilesystem::fileExist($session_filename);
+    }else{
+      return false;
+    }
   }
   public function page_account_base_form(){
     $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
@@ -396,3 +428,5 @@ class PluginAccountAdmin_v1{
     return $rs;
   }
 }
+
+

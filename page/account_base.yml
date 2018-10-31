@@ -152,4 +152,21 @@
               innerHTML: Session file exist
             -
               type: td
-              innerHTML: rs:session_file_exist_text
+              innerHTML: 
+                -
+                  type: span
+                  innerHTML: rs:session_file_exist_text
+                -
+                  type: a
+                  settings:
+                    enabled: rs:session_file_exist
+                  attribute:
+                    onclick: "PluginWfBootstrapjs.modal({id: 'account_session_content', url: '/'+app.class+'/account_session_content/id/'+app.account_id+'', lable: 'Session content'});"
+                  innerHTML: Show
+                -
+                  type: a
+                  settings:
+                    enabled: rs:session_file_exist
+                  attribute:
+                    onclick: "PluginWfBootstrapjs.modal({id: 'account_session_delete', url: '/'+app.class+'/account_session_delete/id/'+app.account_id+'', lable: 'Session delete'});"
+                  innerHTML: Delete

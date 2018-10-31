@@ -1,0 +1,14 @@
+
+-
+  type: p
+  innerHTML:
+    -
+      type: span
+      innerHTML: Session file
+    -
+      type: span
+      innerHTML: rs:session_filename
+    -
+      type: span
+      innerHTML: was deleted. User has to sign in again.
+  

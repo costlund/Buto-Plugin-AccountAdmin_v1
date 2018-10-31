@@ -127,8 +127,10 @@ class PluginAccountAdmin_v1{
         wfPlugin::includeonce('session/reader');
         $content = PluginSessionReader::unserialize($content);
         $rs->set('session_content', $content);
+        $rs->set('session_content_size', sizeof($content));
       }else{
         $rs->set('session_content', null);
+        $rs->set('session_content_size', null);
       }
       return $rs;
     }else{

@@ -48,6 +48,17 @@
             -
               type: td
               innerHTML: rs:activated_text
+-
+  type: h2
+  innerHTML: Management
+-
+  type: table
+  attribute:
+    class: 'table'
+  innerHTML:
+    tbody:
+      type: tbody
+      innerHTML:
         -
           type: tr
           innerHTML:
@@ -111,27 +122,18 @@
             -
               type: td
               innerHTML: rs:cert_id
-        -
-          type: tr
-          innerHTML:
-            -
-              type: th
-              innerHTML: Created at
-            -
-              type: td
-              innerHTML: rs:created_at
-            -
-              type: th
-              innerHTML: Updated at
-            -
-              type: td
-              innerHTML: rs:updated_at
-            -
-              type: th
-              innerHTML: Created by
-            -
-              type: td
-              innerHTML: rs:created_by
+
+-
+  type: h2
+  innerHTML: History
+-
+  type: table
+  attribute:
+    class: 'table'
+  innerHTML:
+    tbody:
+      type: tbody
+      innerHTML:
         -
           type: tr
           innerHTML:
@@ -141,12 +143,57 @@
             -
               type: td
               innerHTML: rs:updated_by
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Created at
+            -
+              type: td
+              innerHTML: rs:created_at
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Updated at
+            -
+              type: td
+              innerHTML: rs:updated_at
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Created by
+            -
+              type: td
+              innerHTML: rs:created_by
+  
+-
+  type: h2
+  innerHTML: Session
+-
+  type: table
+  attribute:
+    class: 'table'
+  innerHTML:
+    tbody:
+      type: tbody
+      innerHTML:
+        -
+          type: tr
+          innerHTML:
             -
               type: th
               innerHTML: Session ID
             -
               type: td
               innerHTML: rs:session_id
+        -
+          type: tr
+          innerHTML:
             -
               type: th
               innerHTML: Session file exist
@@ -156,11 +203,33 @@
                 -
                   type: span
                   innerHTML: rs:session_file_exist_text
+        -
+          type: tr
+          innerHTML:
+            -
+              type: th
+              innerHTML: Session content size
+            -
+              type: td
+              innerHTML: 
+                -
+                  type: span
+                  innerHTML: rs:session_content_size
+        -
+          type: tr
+          innerHTML:
+            -
+              type: td
+              attribute:
+                colspan: 2
+                style: 'text-align:center'
+              innerHTML: 
                 -
                   type: a
                   settings:
                     enabled: rs:session_file_exist
                   attribute:
+                    class: btn btn-default
                     onclick: "PluginWfBootstrapjs.modal({id: 'account_session_content', url: '/'+app.class+'/account_session_content/id/'+app.account_id+'', lable: 'Session content'});"
                   innerHTML: Show
                 -
@@ -168,5 +237,12 @@
                   settings:
                     enabled: rs:session_file_exist
                   attribute:
+                    class: btn btn-warning
                     onclick: "PluginWfBootstrapjs.modal({id: 'account_session_delete', url: '/'+app.class+'/account_session_delete/id/'+app.account_id+'', lable: 'Session delete'});"
                   innerHTML: Delete
+  
+  
+  
+  
+  
+  

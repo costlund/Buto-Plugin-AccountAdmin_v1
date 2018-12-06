@@ -152,6 +152,14 @@ class PluginAccountAdmin_v1{
       return false;
     }
   }
+  private function getSessionFileTime($session_id){
+    if($session_id){
+      $session_filename = $this->getSessionFilename($session_id);
+      return wfFilesystem::getFiletime($session_filename);
+    }else{
+      return null;
+    }
+  }
   public function page_account_base_form(){
     $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
     wfDocument::renderElement(array($widget));
@@ -286,15 +294,29 @@ class PluginAccountAdmin_v1{
     $page = $this->getYml('page/account_log.yml');
     $this->sql->set('account_log/params/account_id/value', wfRequest::get('id'));
     $rs = $this->executeSQL($this->sql->get('account_log'));
+    foreach ($rs->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      if($this->getSessionFileExist($item->get('session_id'))){
+        $rs->set($key.'/session_file_exist', true);
+        $rs->set($key.'/session_file_exist_text', 'Yes');
+        $rs->set($key.'/session_file_time', date('Y-m-d h:i:s', $this->getSessionFileTime($item->get('session_id'))));
+      }else{
+        $rs->set($key.'/session_file_exist', false);
+        $rs->set($key.'/session_file_exist_text', 'No');
+        $rs->set($key.'/session_file_time', null);
+      }
+    }
     $trs = array();
     foreach ($rs->get() as $key => $value) {
       $item = new PluginWfArray($value);
       $trs[] = wfDocument::createHtmlElement('tr', array(
-        wfDocument::createHtmlElement('td', $item->get('date')),
+        wfDocument::createHtmlElement('td', $item->get('date'), array('style' => 'font-size:smaller')),
         wfDocument::createHtmlElement('td', $item->get('type')),
         wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
         wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR')),
-        wfDocument::createHtmlElement('td', $item->get('session_id'))
+        wfDocument::createHtmlElement('td', $item->get('session_id'), array('style' => 'font-size:smaller')),
+        wfDocument::createHtmlElement('td', $item->get('session_file_exist_text')),
+        wfDocument::createHtmlElement('td', $item->get('session_file_time'), array('style' => 'font-size:smaller'))
       ));
     }
     $page->setById('tbody_account_log', 'innerHTML', $trs);
@@ -348,6 +370,12 @@ class PluginAccountAdmin_v1{
     $test = $mysql->runSql($sql);
     return new PluginWfArray($test['data']);
   }
+  /**
+   * Execute sql.
+   * @param array $sql
+   * @param boolean $one If one reckord should be returned.
+   * @return \PluginWfArray
+   */
   private function executeSQL($sql, $one = false){
     wfPlugin::includeonce('wf/mysql');
     $mysql = new PluginWfMysql();

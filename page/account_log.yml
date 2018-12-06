@@ -1,7 +1,7 @@
 -
   type: table
   attribute:
-    class: 'table'
+    class: 'table table-condensed'
     id: table_account_log
   innerHTML:
     thead:
@@ -25,6 +25,12 @@
             -
               type: th
               innerHTML: 'Session ID'
+            -
+              type: th
+              innerHTML: 'Exist'
+            -
+              type: th
+              innerHTML: 'File time'
     tbody:
       type: tbody
       attribute: {id: tbody_account_log}

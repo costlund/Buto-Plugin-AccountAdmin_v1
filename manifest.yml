@@ -1,4 +1,10 @@
-version: '1.0'
+version: '1.1'
+history:
+  '1.1':
+    description: 'Add session file exist and time in account log.'
+history:
+  '1.0':
+    description: 'First version.'
 plugin:
   -
     name: i18n/translate_v1

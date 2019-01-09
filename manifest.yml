@@ -1,5 +1,8 @@
-version: '1.2'
+version: '1.3'
 history:
+  '1.3':
+    date: '2019-01-09'
+    description: 'Remove included js.'
   '1.2':
     date: '2019-01-09'
     description: 'Remove included icons.'
@@ -29,9 +32,6 @@ plugin:
     version: 1.4
   -
     name: wf/textareatab
-    version: '1.0'
-  -
-    name: prism/prismjs
     version: '1.0'
   -
     name: wf/onkeypress

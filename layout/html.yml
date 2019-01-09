@@ -62,13 +62,6 @@ content:
             data:
               plugin: 'wf/callbackjson'
               method: include               
-          prism_prismjs:
-            settings:
-              disabled: false
-            type: widget
-            data:
-              plugin: 'prism/prismjs'
-              method: include               
           onkeypress:
             type: widget
             data:

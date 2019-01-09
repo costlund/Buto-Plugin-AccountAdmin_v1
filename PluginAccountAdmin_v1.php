@@ -25,7 +25,6 @@ class PluginAccountAdmin_v1{
      * Enable plugins.
      */
     wfPlugin::enable('wf/textareatab');
-    wfPlugin::enable('prism/prismjs');
     wfPlugin::enable('wf/onkeypress');
     wfPlugin::enable('chart/amcharts_v3');
     wfPlugin::enable('wf/bootstrapjs');

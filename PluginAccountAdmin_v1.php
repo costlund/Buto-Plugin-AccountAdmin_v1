@@ -24,7 +24,6 @@ class PluginAccountAdmin_v1{
     /**
      * Enable plugins.
      */
-    wfPlugin::enable('davegandy/fontawesome450');
     wfPlugin::enable('wf/textareatab');
     wfPlugin::enable('prism/prismjs');
     wfPlugin::enable('wf/onkeypress');

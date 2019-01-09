@@ -24,11 +24,6 @@ content:
             data:
               plugin: 'wf/bootstrapjs'
               method: include               
-          font_awesome_include:
-            type: widget
-            data:
-              plugin: 'davegandy/fontawesome450'
-              method: include
           title:
             type: title
             innerHTML: 'globals:sys/page/settings/title'

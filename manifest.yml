@@ -1,5 +1,8 @@
-version: '1.1'
+version: '1.2'
 history:
+  '1.2':
+    date: '2019-01-09'
+    description: 'Remove included icons.'
   '1.1':
     description: 'Add session file exist and time in account log.'
 history:
@@ -24,9 +27,6 @@ plugin:
   -
     name: wf/form_v2
     version: 1.4
-  -
-    name: davegandy/fontawesome450
-    version: '1.0'
   -
     name: wf/textareatab
     version: '1.0'

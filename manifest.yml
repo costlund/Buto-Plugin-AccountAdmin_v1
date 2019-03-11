@@ -1,5 +1,8 @@
-version: '1.3'
+version: '1.4'
 history:
+  '1.4':
+    date: '2019-03-11'
+    description: 'Switch from plugin wf/form_v2 to form/form_v1.'
   '1.3':
     date: '2019-01-09'
     description: 'Remove included js.'
@@ -8,7 +11,6 @@ history:
     description: 'Remove included icons.'
   '1.1':
     description: 'Add session file exist and time in account log.'
-history:
   '1.0':
     description: 'First version.'
 plugin:
@@ -27,9 +29,6 @@ plugin:
   -
     name: wf/mysql
     version: '1.1'
-  -
-    name: wf/form_v2
-    version: 1.4
   -
     name: wf/textareatab
     version: '1.0'
@@ -50,6 +49,12 @@ plugin:
     version: '1.0'
   -
     name: datatable/datatable_1_10_16
+    version: '1.0'
+  -
+    name: form/form_v1
+    version: '1.19'
+  -
+    name: wf/embed
     version: '1.0'
 sys:
   -

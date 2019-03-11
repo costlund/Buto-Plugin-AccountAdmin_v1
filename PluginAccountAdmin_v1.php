@@ -15,7 +15,7 @@ class PluginAccountAdmin_v1{
       }
       wfPlugin::includeonce('i18n/translate_v1');
       $this->i18n = new PluginI18nTranslate_v1();
-      wfPlugin::enable('wf/form_v2');
+      wfPlugin::enable('form/form_v1');
     }
   }
   private function init(){
@@ -159,11 +159,11 @@ class PluginAccountAdmin_v1{
     }
   }
   public function page_account_base_form(){
-    $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
+    $widget = wfDocument::createWidget('form/form_v1', 'render', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
     wfDocument::renderElement(array($widget));
   }
   public function page_account_role_form(){
-    $widget = wfDocument::createWidget('wf/form_v2', 'render', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
+    $widget = wfDocument::createWidget('form/form_v1', 'render', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
     wfDocument::renderElement(array($widget));
     if(wfRequest::get('role_id')){
       $html_object = $this->getYml('html_object/role_delete_button.yml');
@@ -172,10 +172,11 @@ class PluginAccountAdmin_v1{
     }
   }
   public function page_account_role_capture(){
-    $widget = wfDocument::createWidget('wf/form_v2', 'capture', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
+    $widget = wfDocument::createWidget('form/form_v1', 'capture', 'yml:/plugin/account/admin_v1/form/account_role_form.yml');
     wfDocument::renderElement(array($widget));
   }
   public function frm_account_base_form_render($form){
+    $form = new PluginWfArray($form);
     $this->init();
     if(wfRequest::get('id')){
       /**
@@ -195,9 +196,10 @@ class PluginAccountAdmin_v1{
       $form->set('items/username/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
       $form->set('items/password/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
     }
-    return $form;
+    return $form->get();
   }
   public function frm_account_role_form_render($form){
+    $form = new PluginWfArray($form);
     $this->init();
     $form->set('items/account_id/default', wfRequest::get('id'));
     if(wfRequest::get('role_id')){
@@ -208,7 +210,7 @@ class PluginAccountAdmin_v1{
       $rs = $this->db_role_select_one(wfRequest::get('role_id'));
       $form->set('items/role/default', $rs->get('role'));
     }
-    return $form;
+    return $form->get();
   }
   private function db_role_select_one($id){
     $this->sql->set('account_role/params/id/value', $id);
@@ -219,10 +221,11 @@ class PluginAccountAdmin_v1{
     return $rs;
   }
   public function page_account_base_capture(){
-    $widget = wfDocument::createWidget('wf/form_v2', 'capture', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
+    $widget = wfDocument::createWidget('form/form_v1', 'capture', 'yml:/plugin/account/admin_v1/form/account_base_form.yml');
     wfDocument::renderElement(array($widget));
   }
   public function frm_account_base_form_capture($form){
+    $form = new PluginWfArray($form);
     $this->init();
     $new = true;
     if($form->get('items/id/post_value')){
@@ -246,6 +249,7 @@ class PluginAccountAdmin_v1{
     }
   }
   public function frm_account_role_form_capture($form){
+    $form = new PluginWfArray($form);
     $this->init();
     if($form->get('items/id/post_value')){
       $this->sql->set('account_role_update/params/id/value', $form->get('items/id/post_value'));

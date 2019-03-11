@@ -12,7 +12,7 @@ items:
     mandatory: false
     validator:
       -
-        plugin: wf/form_v2
+        plugin: form/form_v1
         method: validate_email
       -
         plugin: account/admin_v1
@@ -29,10 +29,6 @@ items:
     type: varchar
     label: Password
     mandatory: true
-    validatorzzz:
-      -
-        plugin: wf/form_v2
-        method: validate_password
   phone:
     type: varchar
     label: Phone

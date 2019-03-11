@@ -93,6 +93,11 @@ content:
               method: js
               data:
                 file: /plugin/account/admin_v1/js/function.js                
+          form_form_v1:
+            type: widget
+            data:
+              plugin: 'form/form_v1'
+              method: include               
       body:
         type: body
         innerHTML: 'body...'

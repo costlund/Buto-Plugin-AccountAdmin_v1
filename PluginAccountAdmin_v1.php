@@ -32,6 +32,8 @@ class PluginAccountAdmin_v1{
     wfPlugin::enable('wf/callbackjson');
     wfPlugin::enable('datatable/datatable_1_10_16');
     wfPlugin::enable('wf/embed');
+    wfPlugin::enable('twitter/bootstrap335v');
+    wfPlugin::enable('wf/ajax');
     /**
      * 
      */

@@ -56,6 +56,12 @@ plugin:
   -
     name: wf/embed
     version: '1.0'
+  -
+    name: twitter/bootstrap335v
+    version: '1.0'
+  -
+    name: wf/ajax
+    version: '1.0'
 sys:
   -
     name: mercury

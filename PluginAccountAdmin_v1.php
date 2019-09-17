@@ -38,6 +38,19 @@ class PluginAccountAdmin_v1{
      * 
      */
     $this->settings = new PluginWfArray(wfArray::get($GLOBALS, 'sys/settings/plugin_modules/'.wfArray::get($GLOBALS, 'sys/class').'/settings'));
+    /**
+     * Set mysql from session if empty.
+     */
+    if(!$this->settings->get('mysql')){
+      $user = wfUser::getSession();
+      $this->settings->set('mysql', $user->get('plugin/account/admin_v1/mysql'));
+    }
+    /**
+     * If no mysql is set.
+     */
+    if(!$this->settings->get('mysql')){
+      exit('No database is provided.');
+    }
     $this->settings->set('mysql', wfSettings::getSettingsFromYmlString($this->settings->get('mysql')));
     $this->sql = wfSettings::getSettingsAsObject("/plugin/account/admin_v1/mysql/sql.yml");
   }
@@ -45,11 +58,12 @@ class PluginAccountAdmin_v1{
     $this->init();
     wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/account/admin_v1/layout');
     $page = $this->getYml('page/desktop.yml');
+    $page->setByTag($this->settings->get('mysql'));  
     /**
      * Insert admin layout from theme.
      */
     $page = wfDocument::insertAdminLayout($this->settings, 1, $page);
-    $page->set('content/app/innerHTML', "var app = {class: '".wfArray::get($GLOBALS, 'sys/class')."'};");
+    $page->setByTag(array('script' => "var app = {class: '".wfArray::get($GLOBALS, 'sys/class')."'};"));
     wfDocument::mergeLayout($page->get());
   }
   public function page_accounts(){

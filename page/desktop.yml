@@ -4,15 +4,33 @@ settings:
     - main
   title: AccountAdmin_v1
 content:
-  app:
+  -
+    type: p
+    innerHTML:
+      -
+        type: span
+        innerHTML: rs:server
+      -
+        type: span
+        innerHTML: '-'
+      -
+        type: span
+        innerHTML: rs:database
+      -
+        type: span
+        innerHTML: '-'
+      -
+        type: span
+        innerHTML: rs:user_name
+  -
     type: script
-    innerHTML: 
-  content: 
+    innerHTML: rs:script
+  -
     type: div
     attribute:
       id: desktop_content
     innerHTML: _
-  script:
+  -
     type: script
     innerHTML: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
     

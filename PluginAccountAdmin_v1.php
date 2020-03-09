@@ -34,6 +34,7 @@ class PluginAccountAdmin_v1{
     wfPlugin::enable('wf/embed');
     wfPlugin::enable('twitter/bootstrap335v');
     wfPlugin::enable('wf/ajax');
+    wfPlugin::enable('wf/table');
     /**
      * 
      */
@@ -359,18 +360,7 @@ class PluginAccountAdmin_v1{
     $this->init();
     $element = $this->getYml('page/stat_signin.yml');
     $account_log = $this->getAccountLog();
-    $trs = array();
-    $tr = $element->getById('tbody', 'innerHTML/0');
-    foreach ($account_log->get() as $key => $value) {
-      $item = new PluginWfArray($value);
-      $tr->setById('col_1', 'innerHTML', $item->get('date'));
-      $tr->setById('col_2', 'innerHTML', $item->get('type'));
-      $tr->setById('col_3', 'innerHTML', $item->get('email'));
-      $tr->setById('col_4', 'innerHTML', $item->get('username'));
-      $tr->setById('col_5', 'innerHTML', $item->get('session_id'));
-      $trs[] = $tr->get();
-    }
-    $element->setById('tbody', 'innerHTML', $trs);
+    $element->setByTag(array('account_log' => $account_log->get()));
     $element->setById('chart_signin', 'data/data/mysql_conn', $this->settings->get('mysql'));
     wfDocument::renderElement($element->get());
   }

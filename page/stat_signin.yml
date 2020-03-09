@@ -6,7 +6,7 @@
     -
       type: div
       attribute:
-        class: col-md-6
+        class: col-md-12
       innerHTML:
         -
           type: widget
@@ -76,66 +76,24 @@
     -
       type: div
       attribute:
-        class: col-md-6
+        class: col-md-12
       innerHTML:
         -
-          type: table
-          attribute:
-            class: table
-          innerHTML:
-            thead:
-              type: thead
-              innerHTML:
-                -
-                  type: tr
-                  innerHTML:
-                    -
-                      type: th
-                      innerHTML: Date
-                    -
-                      type: th
-                      innerHTML: 'Type'
-                    -
-                      type: th
-                      innerHTML: 'Email'
-                    -
-                      type: th
-                      innerHTML: 'Username'
-                    -
-                      type: th
-                      innerHTML: 'Session ID'
-            tbody:
-              type: tbody
-              attribute:
-                id: tbody
-              innerHTML:
-                -
-                  type: tr
-                  innerHTML:
-                    -
-                      type: td
-                      attribute:
-                        id: col_1
-                      innerHTML: '2001-01-01'
-                    -
-                      type: td
-                      attribute:
-                        id: col_2
-                      innerHTML: _
-                    -
-                      type: td
-                      attribute:
-                        id: col_3
-                      innerHTML: _
-                    -
-                      type: td
-                      attribute:
-                        id: col_4
-                      innerHTML: _
-                    -
-                      type: td
-                      attribute:
-                        id: col_5
-                      innerHTML: _
-
+          type: widget
+          data:
+            plugin: wf/table
+            method: render_many
+            data:
+              i18n: false
+              field:
+                date: Date
+                type: Type
+                email: Email
+                username: User
+                session_id: Session
+              rs: rs:account_log
+              datatable:
+                disabled: false
+              class:
+                table: table-sm table-striped table-hover        
     

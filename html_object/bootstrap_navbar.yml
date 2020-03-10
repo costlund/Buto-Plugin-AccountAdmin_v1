@@ -67,6 +67,22 @@ content:
                     attribute:
                       onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: 'New account'});"
                     innerHTML: New account
+              -
+                type: li
+                innerHTML:
+                  -
+                    type: a
+                    attribute:
+                      onclick: "PluginWfBootstrapjs.modal({id: 'stat_os', url: '/'+app.class+'/stat_os', lable: 'OS'});"
+                    innerHTML: OS
+              -
+                type: li
+                innerHTML:
+                  -
+                    type: a
+                    attribute:
+                      onclick: "PluginWfBootstrapjs.modal({id: 'stat_browser', url: '/'+app.class+'/stat_browser', lable: 'Browser'});"
+                    innerHTML: Browser
             
 
 

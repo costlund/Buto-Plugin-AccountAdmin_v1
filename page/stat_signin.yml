@@ -90,7 +90,6 @@
                 type: Type
                 email: Email
                 username: User
-                session_id: Session
               rs: rs:account_log
               datatable:
                 disabled: false

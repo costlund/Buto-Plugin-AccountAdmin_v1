@@ -22,7 +22,8 @@ accounts:
     date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
     (select group_concat(role separator ', ') from account_role where account_id=a.id) as roles,
     (select date_format(date, '%y%m%d %H:%i') from account_log where account_id=a.id order by date desc limit 1) as log_date,
-    (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id
+    (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id,
+    (select HTTP_USER_AGENT from account_log where account_id=a.id order by date desc limit 1) as HTTP_USER_AGENT
     from account as a
     order by a.email;
   select:
@@ -48,6 +49,7 @@ accounts:
     - roles
     - log_date
     - session_id
+    - HTTP_USER_AGENT
 account:
   sql: |
     select 

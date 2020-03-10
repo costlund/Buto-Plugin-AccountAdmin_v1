@@ -55,8 +55,13 @@
                   innerHTML: 'Log date'
                 -
                   type: th
-                  innerHTML: 'Session ID'
-                  
+                  innerHTML: Platform
+                -
+                  type: th
+                  innerHTML: Browser
+                -
+                  type: th
+                  innerHTML: 'User agent'
         tbody:
           type: tbody
           attribute:

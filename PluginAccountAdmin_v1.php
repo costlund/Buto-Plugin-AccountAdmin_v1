@@ -70,10 +70,25 @@ class PluginAccountAdmin_v1{
   public function page_accounts(){
     $this->init();
     $rs = $this->executeSQL($this->sql->get('accounts'));
+    /**
+     * 
+     */
+    wfPlugin::includeonce('browser/detection_v1');
+    $browser = new PluginBrowserDetection_v1();
+    /**
+     * 
+     */
     $page = $this->getYml('page/accounts.yml');
     $trs = array();
     foreach ($rs->get() as $key => $value) {
       $item = new PluginWfArray($value);
+      /**
+       * 
+       */
+      $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
+      /**
+       * 
+       */
       $onclick = "PluginAccountAdmin_v1.account_view('".$item->get('id')."');";
       $trs[] = wfDocument::createHtmlElement('tr', array(
       wfDocument::createHtmlElement('td', $item->get('email')),
@@ -87,11 +102,60 @@ class PluginAccountAdmin_v1{
       wfDocument::createHtmlElement('td', $item->get('updated_at')),
       wfDocument::createHtmlElement('td', $item->get('roles')),
       wfDocument::createHtmlElement('td', $item->get('log_date')),
-      wfDocument::createHtmlElement('td', $item->get('session_id'))
+      wfDocument::createHtmlElement('td', $user_browser->get('os_name')),
+      wfDocument::createHtmlElement('td', $user_browser->get('browser_name')),
+      wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT'))
       ), array('style' => 'cursor:pointer', 'onclick' => $onclick));
     }
     $page->setById('tbody', 'innerHTML', $trs);
     wfDocument::renderElement($page->get());
+  }
+  private function get_browser_detection(){
+    $rs = $this->executeSQL($this->sql->get('accounts'));
+    wfPlugin::includeonce('browser/detection_v1');
+    $browser = new PluginBrowserDetection_v1();
+    foreach ($rs->get() as $key => $value) {
+      $item = new PluginWfArray($value);
+      $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
+    }
+    return $browser->stat;
+  }
+  private function get_element_stat($type = 'os'){
+    $element = $this->getYml('page/stat_'.$type.'.yml');
+    $graph = $element->getById('chart_'.$type.'', 'data/data/chart/data/graphs/0');
+    $graphs = array();
+    $dataProvider = array('users' => 'Users');
+    /**
+     * 
+     */
+    $browser_detection = $this->get_browser_detection();
+    foreach ($browser_detection[$type] as $key => $value) {
+      if(!$key){
+        continue;
+      }
+      $graph->set('id', $key);
+      $graph->set('labelText', $key);
+      $graph->set('title', $key);
+      $graph->set('valueField', $key);
+      $graphs[] = $graph->get();
+      $dataProvider[$key] = $value;
+    }
+    /**
+     * 
+     */
+    $element->setById('chart_'.$type.'', 'data/data/chart/data/graphs', $graphs);
+    $element->setById('chart_'.$type.'', 'data/data/chart/data/dataProvider/0', $dataProvider);
+    return $element;
+  }
+  public function page_stat_os(){
+    $this->init();
+    $element = $this->get_element_stat('os');
+    wfDocument::renderElement($element->get());
+  }
+  public function page_stat_browser(){
+    $this->init();
+    $element = $this->get_element_stat('browser');
+    wfDocument::renderElement($element->get());
   }
   public function page_account_view(){
     $this->init();

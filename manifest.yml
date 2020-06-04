@@ -1,61 +1,61 @@
-version: '1.6.0'
+version: 1.6.0
 history:
-  '1.6.0':
+  1.6.0:
     date: '2020-03-10'
-    title: Browser detection
+    title: 'Browser detection'
     description: 'Add plugin browser/detection_v1. Chart OS and Browser.'
-  '1.5.0':
+  1.5.0:
     date: '2020-03-09'
-    title: Start page
+    title: 'Start page'
     description: 'Improved start page layout. Using PluginWfTable.'
-  '1.4.0':
+  1.4.0:
     date: '2019-03-11'
-    title: Form plugin
+    title: 'Form plugin'
     description: 'Switch from plugin wf/form_v2 to form/form_v1.'
-  '1.3.0':
+  1.3.0:
     date: '2019-01-09'
-    title: Included js
+    title: 'Included js'
     description: 'Remove included js.'
-  '1.2.0':
+  1.2.0:
     date: '2019-01-09'
     title: Icons
     description: 'Remove included icons.'
-  '1.1.0':
+  1.1.0:
     date: '2019-01-09'
     title: Session
     description: 'Add session file exist and time in account log.'
-  '1.0.0':
+  1.0.0:
     date: '2019-01-09'
-    title: First version
+    title: 'First version'
     description: 'First version.'
 plugin:
   -
     name: i18n/translate_v1
-    version: '1.0'
+    version: 1.7.0
   -
     name: wf/array
-    version: '1.0'
+    version: 1.2.0
   -
     name: wf/yml
-    version: '1.0'
+    version: 1.2.2
   -
     name: session/reader
     version: '1.0'
   -
     name: wf/mysql
-    version: '1.1'
+    version: 1.11.0
   -
     name: wf/textareatab
     version: '1.0'
   -
     name: wf/onkeypress
-    version: '1.0'
+    version: '1.1'
   -
     name: chart/amcharts_v3
-    version: '1.0'
+    version: '1.1'
   -
     name: wf/bootstrapjs
-    version: '1.0'
+    version: '1.6'
   -
     name: wf/dom
     version: '1.0'
@@ -64,25 +64,25 @@ plugin:
     version: '1.0'
   -
     name: datatable/datatable_1_10_16
-    version: '1.0'
+    version: '1.1'
   -
     name: form/form_v1
-    version: '1.19'
+    version: 1.45.5
   -
     name: wf/embed
-    version: '1.0'
+    version: 1.1.0
   -
     name: twitter/bootstrap335v
-    version: '1.0'
+    version: 1.0.1
   -
     name: wf/ajax
-    version: '1.0'
+    version: 1.4.0
   -
     name: browser/detection_v1
-    version: '1.1.0'
+    version: 1.1.0
   -
     name: wf/table
-    version: '1.16.2'
+    version: 1.17.1
 sys:
   -
     name: mercury

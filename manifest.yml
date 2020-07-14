@@ -76,7 +76,7 @@ plugin:
     version: 1.0.1
   -
     name: wf/ajax
-    version: 1.4.0
+    version: 1.4.1
   -
     name: browser/detection_v1
     version: 1.1.0

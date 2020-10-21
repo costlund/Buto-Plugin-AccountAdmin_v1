@@ -4,13 +4,27 @@
     id: script
   innerHTML: ""
 -
-  type: h1
+  type: div
   attribute:
-    onclick: "PluginWfAjax.update('content');"
+    class: table-responsive
   innerHTML:
     -
-      type: span
-      innerHTML: rs:id
+      type: table
+      attribute:
+        class: 'table'
+      innerHTML:
+        tbody:
+          type: tbody
+          innerHTML:
+            -
+              type: tr
+              innerHTML:
+                -
+                  type: th
+                  innerHTML: ID
+                -
+                  type: td
+                  innerHTML: rs:id
 -
   type: ul
   attribute:

@@ -1,5 +1,9 @@
-version: 1.7.2
+version: 1.7.3
 history:
+  1.7.3:
+    date: '2020-10-21'
+    title: 'Layout'
+    description: 'Layout fix.'
   1.7.2:
     date: '2020-10-21'
     title: 'Tables'

@@ -1,88 +1,90 @@
-settings:
-  name: 'Bootstrap Navbar'
-content:
-  -
-    type: nav
-    attribute:
-      class: 'navbar navbar-default'
-    innerHTML:
-      0:
-        type: div
-        attribute:
-          class: navbar-header
-        innerHTML:
-          -
+-
+  type: nav
+  attribute:
+    class: 'navbar navbar-default'
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: navbar-header
+      innerHTML:
+        -
+          type: button
+          attribute:
             type: button
-            attribute:
-              type: button
-              class: 'navbar-toggle collapsed'
-              data-toggle: collapse
-              data-target: '#sdf'
-              aria-expanded: 'false'
-            innerHTML:
-              0:
-                type: span
-                attribute:
-                  class: icon-bar
-              1:
-                type: span
-                attribute:
-                  class: icon-bar
-              3:
-                type: span
-                attribute:
-                  class: icon-bar
-          -
-            type: a
-            attribute:
-              class: navbar-brand
-              onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
-            innerHTML: AccountAdmin_v1
-      2:
-        type: div
-        settings:
-          disabled: false
-        attribute:
-          class: 'collapse navbar-collapse'
-          id: sdf
-        innerHTML:
-          -
-            type: ul
-            attribute:
-              class: 'nav navbar-nav'
-            innerHTML:
-              -
-                type: li
-                innerHTML:
-                  -
-                    type: a
-                    attribute:
-                      onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
-                    innerHTML: Accounts
-              -
-                type: li
-                innerHTML:
-                  -
-                    type: a
-                    attribute:
-                      onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: 'New account'});"
-                    innerHTML: New account
-              -
-                type: li
-                innerHTML:
-                  -
-                    type: a
-                    attribute:
-                      onclick: "PluginWfBootstrapjs.modal({id: 'stat_os', url: '/'+app.class+'/stat_os', lable: 'OS'});"
-                    innerHTML: OS
-              -
-                type: li
-                innerHTML:
-                  -
-                    type: a
-                    attribute:
-                      onclick: "PluginWfBootstrapjs.modal({id: 'stat_browser', url: '/'+app.class+'/stat_browser', lable: 'Browser'});"
-                    innerHTML: Browser
-            
+            class: 'navbar-toggle collapsed'
+            data-toggle: collapse
+            data-target: '#sdf'
+            aria-expanded: 'false'
+          innerHTML:
+            -
+              type: span
+              attribute:
+                class: icon-bar
+            -
+              type: span
+              attribute:
+                class: icon-bar
+            -
+              type: span
+              attribute:
+                class: icon-bar
+        -
+          type: a
+          attribute:
+            class: navbar-brand
+            onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
+          innerHTML:
+            -
+              type: img
+              attribute:
+                src: '/plugin/account/admin_v1/icon/icon.png'
+                style:
+                  width: 20px
+    -
+      type: div
+      settings:
+        disabled: false
+      attribute:
+        class: 'collapse navbar-collapse'
+      innerHTML:
+        -
+          type: ul
+          attribute:
+            class: 'nav navbar-nav'
+          innerHTML:
+            -
+              type: li
+              innerHTML:
+                -
+                  type: a
+                  attribute:
+                    onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
+                  innerHTML: Accounts
+            -
+              type: li
+              innerHTML:
+                -
+                  type: a
+                  attribute:
+                    onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: 'New account'});"
+                  innerHTML: Add
+            -
+              type: li
+              innerHTML:
+                -
+                  type: a
+                  attribute:
+                    onclick: "PluginWfBootstrapjs.modal({id: 'stat_os', url: '/'+app.class+'/stat_os', lable: 'OS'});"
+                  innerHTML: OS
+            -
+              type: li
+              innerHTML:
+                -
+                  type: a
+                  attribute:
+                    onclick: "PluginWfBootstrapjs.modal({id: 'stat_browser', url: '/'+app.class+'/stat_browser', lable: 'Browser'});"
+                  innerHTML: Browser
+          
 
 

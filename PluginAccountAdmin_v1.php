@@ -30,7 +30,7 @@ class PluginAccountAdmin_v1{
     wfPlugin::enable('wf/bootstrapjs');
     wfPlugin::enable('wf/dom');
     wfPlugin::enable('wf/callbackjson');
-    wfPlugin::enable('datatable/datatable_1_10_16');
+    wfPlugin::enable('datatable/datatable_1_10_18');
     wfPlugin::enable('wf/embed');
     wfPlugin::enable('twitter/bootstrap335v');
     wfPlugin::enable('wf/ajax');

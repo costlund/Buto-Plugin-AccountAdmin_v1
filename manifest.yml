@@ -1,5 +1,9 @@
-version: 1.7.5
+version: 1.7.6
 history:
+  1.7.6:
+    date: '2020-10-21'
+    title: 'Plugin upgrade'
+    description: 'Upgrade plugin datatable/datatable_1_10_16 to datatable/datatable_1_10_18.'
   1.7.5:
     date: '2020-10-21'
     title: 'Navbar'
@@ -91,7 +95,7 @@ plugin:
     name: wf/callbackjson
     version: '1.0'
   -
-    name: datatable/datatable_1_10_16
+    name: datatable/datatable_1_10_18
     version: '1.1'
   -
     name: form/form_v1

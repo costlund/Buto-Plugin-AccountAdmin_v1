@@ -75,7 +75,7 @@ content:
           datatable:
             type: widget
             data:
-              plugin: datatable/datatable_1_10_16
+              plugin: datatable/datatable_1_10_18
               method: include
               data:
                 style: bootstrap

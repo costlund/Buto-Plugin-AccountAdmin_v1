@@ -69,7 +69,7 @@
         datatable:
           type: widget
           data:
-            plugin: datatable/datatable_1_10_16
+            plugin: datatable/datatable_1_10_18
             method: run
             data:
               id: table_accounts
@@ -84,7 +84,7 @@
                     - 0
                     - desc
                 language:
-                  url: /plugin/datatable/datatable_1_10_16/i18n/Swedish.json
+                  url: /plugin/datatable/datatable_1_10_18/i18n/Swedish.json
       
 
    

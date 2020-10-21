@@ -7,92 +7,92 @@
   type: h1
   attribute:
     onclick: "PluginWfAjax.update('content');"
-  innerHTML: Account
+  innerHTML:
+    -
+      type: span
+      innerHTML: rs:id
+-
+  type: ul
+  attribute:
+    class: 'nav nav-tabs'
+    id: navtabs_account_view
+    role: tablist
+  innerHTML:
+    -
+      type: li
+      attribute:
+        class: nav-item
+        role: presentation
+      innerHTML:
+        -
+          type: a
+          attribute:
+            class: nav-link
+            href: '#'
+          innerHTML: Details
+    -
+      type: li
+      attribute:
+        class: nav-item
+        role: presentation
+      innerHTML:
+        -
+          type: a
+          attribute:
+            class: nav-link
+            href: '#'
+          innerHTML: Log
+    -
+      type: li
+      attribute:
+        class: nav-item
+        role: presentation
+      innerHTML:
+        -
+          type: a
+          attribute:
+            class: nav-link
+            href: '#'
+          innerHTML: Roles
 -
   type: div
   attribute:
-    class: row
+    style: 'margin-top:20px;min-height:300px'
+    id: content_account_view
   innerHTML:
     -
       type: div
       attribute:
-        class: col-sm-12
-      innerHTML:
-        -
-          type: h2
-          attribute:
-            onclick: "PluginWfAjax.update('account_base');"
-          innerHTML: Details
-        -
-          type: a
-          attribute:
-            onclick: "PluginWfBootstrapjs.modal({id: 'account_delete', url: '/'+app.class+'/account_delete/id/'+app.account_id+'', lable: 'Delete account'});"
-          innerHTML: Delete
-        -
-          type: a
-          attribute:
-            onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form/id/'+app.account_id+'', lable: 'Account'});"
-          innerHTML: Edit
-        -
-          type: div
-          attribute:
-            id: account_base
-          innerHTML: _
-        -
-          type: script
-          innerHTML: "PluginWfAjax.load('account_base', '/'+app.class+'/account_base/id/'+app.account_id);"
+        id: tab_account_base
+        data-url: '_'
+        class: plugin_bootstrap_navtabs_content
+        style: 'display:none'
+      innerHTML: 
+    -
+      type: script
+      innerHTML: document.getElementById('tab_account_base').setAttribute('data-url', '/'+app.class+'/account_base/id/'+app.account_id)
     -
       type: div
       attribute:
-        class: col-sm-12
+        id: tab_account_log
+        data-url: '_'
+        class: plugin_bootstrap_navtabs_content
+        style: 'display:none'
       innerHTML:
-        -
-          type: div
-          attribute:
-            class: well
-          innerHTML:
-            -
-              type: h2
-              attribute:
-                onclick: "PluginWfAjax.update('account_log');"
-              innerHTML: Log
-            -
-              type: div
-              attribute:
-                id: account_log
-              innerHTML: _
-            -
-              type: script
-              innerHTML: "PluginWfAjax.load('account_log', '/'+app.class+'/account_log/id/'+app.account_id);"
+    -
+      type: script
+      innerHTML: document.getElementById('tab_account_log').setAttribute('data-url', '/'+app.class+'/account_log/id/'+app.account_id)
     -
       type: div
       attribute:
-        class: col-sm-12
-        style: "min-height:600px;"
-      innerHTML:
-        -
-          type: div
-          attribute:
-            class: well
-          innerHTML:
-            -
-              type: h2
-              attribute:
-                onclick: "PluginWfAjax.update('account_roles');"
-              innerHTML: Role
-            -
-              type: a
-              attribute:
-                onclick: "PluginWfBootstrapjs.modal({id: 'account_role_form', url: '/'+app.class+'/account_role_form/id/'+app.account_id+'', lable: $('#add_role').text(), size: 'sm' });"
-                id: add_role
-              innerHTML: Add
-            -
-              type: div
-              attribute:
-                id: account_roles
-              innerHTML: _
-            -
-              type: script
-              innerHTML: "PluginWfAjax.load('account_roles', '/'+app.class+'/account_roles/id/'+app.account_id);"
-          
-   
+        id: tab_account_roles
+        data-url: '_'
+        class: plugin_bootstrap_navtabs_content
+        style: 'display:none'
+      innerHTML: This content is static.
+    -
+      type: script
+      innerHTML: document.getElementById('tab_account_roles').setAttribute('data-url', '/'+app.class+'/account_roles/id/'+app.account_id)
+-
+  type: script
+  innerHTML: "PluginBootstrapNavtabs_v1.nav_init({ul: 'navtabs_account_view', content: 'content_account_view', click: 0});"

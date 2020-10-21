@@ -1,4 +1,20 @@
 -
+  type: div
+  attribute:
+    class: row
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: col-sm-12
+      innerHTML:
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_role_form', url: '/'+app.class+'/account_role_form/id/'+app.account_id+'', lable: $('#add_role').text(), size: 'sm' });"
+            id: add_role
+          innerHTML: Add
+-
   type: table
   attribute:
     class: 'table'

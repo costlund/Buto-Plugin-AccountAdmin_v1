@@ -1,5 +1,9 @@
-version: 1.6.1
+version: 1.7.0
 history:
+  1.7.0:
+    date: '2020-10-21'
+    title: 'Account view'
+    description: 'Add tabs in account view.'
   1.6.1:
     date: '2020-10-21'
     title: 'Plugin'

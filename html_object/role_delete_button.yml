@@ -7,7 +7,7 @@
 -
   type: a
   attribute:
-    onclick: "if(confirm(  $('#are_you_sure').text()  )){ $.get('/'+app.class+'/account_role_delete/id/'+app.account_id+'/role_id/'+this.getAttribute('data-role_id'), function(){ PluginWfAjax.update('account_roles');$('#account_role_form').modal('hide'); });}"
+    onclick: "if(confirm(  $('#are_you_sure').text()  )){ $.get('/'+app.class+'/account_role_delete/id/'+app.account_id+'/role_id/'+this.getAttribute('data-role_id'), function(){ PluginWfAjax.update('tab_account_roles');$('#account_role_form').modal('hide'); });}"
     data-role_id: _
     id: btn_delete
   innerHTML: Delete

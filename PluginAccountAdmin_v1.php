@@ -161,6 +161,8 @@ class PluginAccountAdmin_v1{
     $this->init();
     $page = $this->getYml('page/account_view.yml');
     $page->setById('script', 'innerHTML', "app.account_id='".wfRequest::get('id')."'");
+    $rs = $this->getAccount();
+    $page->setByTag($rs->get());
     wfDocument::renderElement($page->get());
   }
   public function page_account_base(){
@@ -324,7 +326,7 @@ class PluginAccountAdmin_v1{
     $this->sql->set('account_capture_update/params/activated/value', $form->get('items/activated/post_value'));
     $this->executeSQL($this->sql->get('account_capture_update'));
     if(!$new){
-      return array("PluginWfAjax.update('account_base');$('#account_base_form').modal('hide');");
+      return array("PluginWfAjax.update('tab_account_base');$('#account_base_form').modal('hide');");
     }else{
       return array("PluginWfAjax.update('desktop_content');$('.modal').modal('hide');PluginAccountAdmin_v1.account_view('$id');");
     }
@@ -342,7 +344,7 @@ class PluginAccountAdmin_v1{
       $this->sql->set('account_role_insert/params/role/value', $form->get('items/role/post_value'));
       $this->executeSQL($this->sql->get('account_role_insert'));
     }
-    return array("PluginWfAjax.update('account_roles');$('#account_role_form').modal('hide');");
+    return array("PluginWfAjax.update('tab_account_roles');$('#account_role_form').modal('hide');");
   }
   public function page_account_delete(){
     $this->init();

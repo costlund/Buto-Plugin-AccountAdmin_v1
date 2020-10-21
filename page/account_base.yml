@@ -1,4 +1,24 @@
 -
+  type: div
+  attribute:
+    class: row
+  innerHTML:
+    -
+      type: div
+      attribute:
+        class: col-sm-12
+      innerHTML:
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_delete', url: '/'+app.class+'/account_delete/id/'+app.account_id+'', lable: 'Delete account'});"
+          innerHTML: Delete
+        -
+          type: a
+          attribute:
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form/id/'+app.account_id+'', lable: 'Account'});"
+          innerHTML: Edit
+-
   type: table
   attribute:
     class: 'table'

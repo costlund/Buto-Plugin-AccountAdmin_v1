@@ -104,6 +104,11 @@ content:
               rel: icon
               type: image/x-icon
               href: '/plugin/account/admin_v1/icon/icon.png?x=1'
+          navtabs:
+            type: widget
+            data:
+              plugin: bootstrap/navtabs_v1
+              method: include
       body:
         type: body
         innerHTML: 'body...'

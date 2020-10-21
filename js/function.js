@@ -4,7 +4,7 @@ function PluginAccountAdmin_v1(){
   }
   this.account_delete = function(){
     $.get('/'+app.class+'/account_delete_yes/id/'+app.account_id, function(){ 
-      PluginWfAjax.update('desktop_content');$('.modal').modal('hide'); 
+      $('.modal').modal('hide'); 
     });
   }
 }

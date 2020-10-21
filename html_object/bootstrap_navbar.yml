@@ -1,91 +1,43 @@
 -
-  type: nav
-  attribute:
-    class: 'navbar navbar-default'
-  innerHTML:
-    -
-      type: div
-      attribute:
-        class: navbar-header
-      innerHTML:
+  type: widget
+  data:
+    plugin: 'bootstrap/navbar_v1'
+    method: navbar
+    data:
+      brand_href: '#'
+      brand:
         -
-          type: button
+          type: img
           attribute:
-            type: button
-            class: 'navbar-toggle collapsed'
-            data-toggle: collapse
-            data-target: '#navbar_account_admin_v1'
-            aria-expanded: 'false'
-          innerHTML:
-            -
-              type: span
-              attribute:
-                class: icon-bar
-            -
-              type: span
-              attribute:
-                class: icon-bar
-            -
-              type: span
-              attribute:
-                class: icon-bar
+            src: '/plugin/account/admin_v1/icon/icon.png'
+            style:
+              width: 24px
+              margin-top: -5px
         -
-          type: a
+          type: span
           attribute:
-            class: navbar-brand
-            onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
-          innerHTML:
-            -
-              type: img
-              attribute:
-                src: '/plugin/account/admin_v1/icon/icon.png'
-                style:
-                  width: 20px
-    -
-      type: div
-      settings:
-        disabled: false
-      attribute:
-        class: 'collapse navbar-collapse'
+            class: d-sm-none
+          innerHTML: 'Brand-name'
+      navbar:
         id: navbar_account_admin_v1
-      innerHTML:
-        -
-          type: ul
-          attribute:
-            class: 'nav navbar-nav'
-          innerHTML:
-            -
-              type: li
-              innerHTML:
-                -
-                  type: a
-                  attribute:
-                    onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
-                  innerHTML: Accounts
-            -
-              type: li
-              innerHTML:
-                -
-                  type: a
-                  attribute:
-                    onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: 'New account'});"
-                  innerHTML: Add
-            -
-              type: li
-              innerHTML:
-                -
-                  type: a
-                  attribute:
-                    onclick: "PluginWfBootstrapjs.modal({id: 'stat_os', url: '/'+app.class+'/stat_os', lable: 'OS'});"
-                  innerHTML: OS
-            -
-              type: li
-              innerHTML:
-                -
-                  type: a
-                  attribute:
-                    onclick: "PluginWfBootstrapjs.modal({id: 'stat_browser', url: '/'+app.class+'/stat_browser', lable: 'Browser'});"
-                  innerHTML: Browser
-          
-
-
+        item:
+          -
+            text: Start
+            onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/stat_signin');"
+          -
+            text: List
+            onclick: "PluginWfAjax.load('desktop_content', '/'+app.class+'/accounts');"
+          -
+            type: dropdown
+            text: Statistic
+            item:
+              -
+                text: OS
+                onclick: "PluginWfBootstrapjs.modal({id: 'stat_os', url: '/'+app.class+'/stat_os', lable: this.innerHTML});"
+              -
+                text: Browser
+                onclick: "PluginWfBootstrapjs.modal({id: 'stat_browser', url: '/'+app.class+'/stat_browser', lable: this.innerHTML});"
+        item_right:
+          -
+            text: Add
+            onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form?id=', lable: this.innerHTML});"

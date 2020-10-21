@@ -1,5 +1,9 @@
-version: 1.7.6
+version: 1.8.0
 history:
+  1.8.0:
+    date: '2020-10-21'
+    title: 'Bootstrap'
+    description: 'Upgrade Bootstrap from 3 to 4.'
   1.7.6:
     date: '2020-10-21'
     title: 'Plugin upgrade'

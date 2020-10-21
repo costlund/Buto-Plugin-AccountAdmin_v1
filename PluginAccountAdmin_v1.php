@@ -35,6 +35,7 @@ class PluginAccountAdmin_v1{
     wfPlugin::enable('twitter/bootstrap335v');
     wfPlugin::enable('wf/ajax');
     wfPlugin::enable('wf/table');
+    wfPlugin::enable('bootstrap/navtabs_v1');
     /**
      * 
      */

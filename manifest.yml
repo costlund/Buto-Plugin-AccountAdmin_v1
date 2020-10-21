@@ -1,5 +1,9 @@
-version: 1.7.3
+version: 1.7.4
 history:
+  1.7.4:
+    date: '2020-10-21'
+    title: 'New account'
+    description: 'Does not update account list when new account is created due to slow process.'
   1.7.3:
     date: '2020-10-21'
     title: 'Layout'

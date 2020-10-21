@@ -329,7 +329,7 @@ class PluginAccountAdmin_v1{
     if(!$new){
       return array("PluginWfAjax.update('tab_account_base');$('#account_base_form').modal('hide');");
     }else{
-      return array("PluginWfAjax.update('desktop_content');$('.modal').modal('hide');PluginAccountAdmin_v1.account_view('$id');");
+      return array("$('.modal').modal('hide');PluginAccountAdmin_v1.account_view('$id');");
     }
   }
   public function frm_account_role_form_capture($form){

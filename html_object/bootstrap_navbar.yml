@@ -14,7 +14,7 @@
             type: button
             class: 'navbar-toggle collapsed'
             data-toggle: collapse
-            data-target: '#sdf'
+            data-target: '#navbar_account_admin_v1'
             aria-expanded: 'false'
           innerHTML:
             -
@@ -47,6 +47,7 @@
         disabled: false
       attribute:
         class: 'collapse navbar-collapse'
+        id: navbar_account_admin_v1
       innerHTML:
         -
           type: ul

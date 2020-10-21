@@ -1,5 +1,9 @@
-version: 1.7.4
+version: 1.7.5
 history:
+  1.7.5:
+    date: '2020-10-21'
+    title: 'Navbar'
+    description: 'Add id to navbar.'
   1.7.4:
     date: '2020-10-21'
     title: 'New account'

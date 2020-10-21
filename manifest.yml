@@ -1,5 +1,9 @@
-version: 1.7.1
+version: 1.7.2
 history:
+  1.7.2:
+    date: '2020-10-21'
+    title: 'Tables'
+    description: 'Responsive tables.'
   1.7.1:
     date: '2020-10-21'
     title: 'Plugin'

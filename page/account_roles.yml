@@ -15,12 +15,17 @@
             id: add_role
           innerHTML: Add
 -
-  type: table
+  type: div
   attribute:
-    class: 'table'
-    id: table_account_role
+    class: table-responsive
   innerHTML:
-    tbody:
-      type: tbody
-      attribute: {id: tbody_account_role}
+    -
+      type: table
+      attribute:
+        class: 'table'
+        id: table_account_role
       innerHTML:
+        tbody:
+          type: tbody
+          attribute: {id: tbody_account_role}
+          innerHTML:

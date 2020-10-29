@@ -1,5 +1,9 @@
-version: 1.8.1
+version: 1.8.2
 history:
+  1.8.2:
+    date: '2020-10-29'
+    title: 'Charts'
+    description: 'Sort charts.'
   1.8.1:
     date: '2020-10-29'
     title: 'Statistic'

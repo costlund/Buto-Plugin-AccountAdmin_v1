@@ -109,8 +109,9 @@ class PluginAccountAdmin_v1{
     $browser = new PluginBrowserDetection_v1();
     foreach ($rs->get() as $key => $value) {
       $item = new PluginWfArray($value);
-      $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
+      $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
     }
+    $browser->sort();
     return $browser->stat;
   }
   private function get_element_stat($type = 'os'){

@@ -22,7 +22,7 @@
                 left(date,10) as date, 
                 count(id) as antal
                 from account_log
-                where date>date_add(now(), INTERVAL -10 DAY)
+                where date>date_add(left(now(),10), INTERVAL -10 DAY)
                 group by left(date,10);
               chart:
                 id: chart_signin

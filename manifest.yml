@@ -1,5 +1,9 @@
-version: 1.8.0
+version: 1.8.1
 history:
+  1.8.1:
+    date: '2020-10-29'
+    title: 'Statistic'
+    description: 'SQL adjustment for statistic.'
   1.8.0:
     date: '2020-10-21'
     title: 'Bootstrap'

@@ -424,7 +424,8 @@ class PluginAccountAdmin_v1{
     wfDocument::renderElement($element->get());
   }
   private function getAccountLog(){
-    $rs = $this->runSQL("select l.date, l.type, a.email, a.username, l.session_id from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(now(), INTERVAL -10 DAY) order by l.date desc;");
+    $sql = "select l.date, l.type, a.email, a.username, l.session_id from account_log as l inner join account as a on l.account_id=a.id where l.date>date_add(left(now(),10), INTERVAL -10 DAY) order by l.date desc;";
+    $rs = $this->runSQL($sql);
     return $rs;
   }
   private function getYml($file){

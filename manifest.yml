@@ -1,20 +1,24 @@
-version: 1.9.0
+version: 1.9.1
 history:
+  1.9.1:
+    date: '2020-11-17'
+    title: Version
+    description: 'Versions update.'
   1.9.0:
     date: '2020-11-04'
-    title: 'Export'
+    title: Export
     description: 'Add button export to excel in account list.'
   1.8.2:
     date: '2020-10-29'
-    title: 'Charts'
+    title: Charts
     description: 'Sort charts.'
   1.8.1:
     date: '2020-10-29'
-    title: 'Statistic'
+    title: Statistic
     description: 'SQL adjustment for statistic.'
   1.8.0:
     date: '2020-10-21'
-    title: 'Bootstrap'
+    title: Bootstrap
     description: 'Upgrade Bootstrap from 3 to 4.'
   1.7.6:
     date: '2020-10-21'
@@ -22,7 +26,7 @@ history:
     description: 'Upgrade plugin datatable/datatable_1_10_16 to datatable/datatable_1_10_18.'
   1.7.5:
     date: '2020-10-21'
-    title: 'Navbar'
+    title: Navbar
     description: 'Add id to navbar.'
   1.7.4:
     date: '2020-10-21'
@@ -30,15 +34,15 @@ history:
     description: 'Does not update account list when new account is created due to slow process.'
   1.7.3:
     date: '2020-10-21'
-    title: 'Layout'
+    title: Layout
     description: 'Layout fix.'
   1.7.2:
     date: '2020-10-21'
-    title: 'Tables'
+    title: Tables
     description: 'Responsive tables.'
   1.7.1:
     date: '2020-10-21'
-    title: 'Plugin'
+    title: Plugin
     description: 'Enable plugin and add to manifest.'
   1.7.0:
     date: '2020-10-21'
@@ -91,7 +95,7 @@ plugin:
     version: '1.0'
   -
     name: wf/mysql
-    version: 1.11.0
+    version: 1.12.0
   -
     name: wf/textareatab
     version: '1.0'
@@ -112,10 +116,10 @@ plugin:
     version: '1.0'
   -
     name: datatable/datatable_1_10_18
-    version: '1.1'
+    version: 1.4.2
   -
     name: form/form_v1
-    version: 1.48.0
+    version: 1.48.2
   -
     name: wf/embed
     version: 1.1.0
@@ -130,10 +134,13 @@ plugin:
     version: 1.1.0
   -
     name: wf/table
-    version: 1.19.1
+    version: 1.20.0
   -
     name: bootstrap/navtabs_v1
     version: 1.2.0
+  -
+    name: theme/include
+    version: 1.7.1
 sys:
   -
     name: mercury

@@ -140,7 +140,7 @@ plugin:
     version: 1.2.0
   -
     name: theme/include
-    version: 1.7.1
+    version: 1.8.0
 sys:
   -
     name: mercury

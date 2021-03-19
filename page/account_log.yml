@@ -23,9 +23,6 @@
                   innerHTML: 'Type'
                 -
                   type: th
-                  innerHTML: 'User agent'
-                -
-                  type: th
                   innerHTML: 'IP'
                 -
                   type: th
@@ -36,6 +33,15 @@
                 -
                   type: th
                   innerHTML: 'File time'
+                -
+                  type: th
+                  innerHTML: 'User agent'
+                -
+                  type: th
+                  innerHTML: 'OS'
+                -
+                  type: th
+                  innerHTML: 'Browser'
         tbody:
           type: tbody
           attribute: {id: tbody_account_log}

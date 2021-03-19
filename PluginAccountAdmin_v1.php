@@ -373,6 +373,20 @@ class PluginAccountAdmin_v1{
     $page = $this->getYml('page/account_log.yml');
     $this->sql->set('account_log/params/account_id/value', wfRequest::get('id'));
     $rs = $this->executeSQL($this->sql->get('account_log'));
+    /**
+     * 
+     */
+    wfPlugin::includeonce('browser/detection_v1');
+    $browser = new PluginBrowserDetection_v1();
+    foreach($rs->get() as $k => $v){
+      $i = new PluginWfArray($v);
+      $user_browser = $browser->get_browser($i->get('HTTP_USER_AGENT'), true);
+      $rs->set("$k/os_name", $user_browser->get('os_name'));
+      $rs->set("$k/browser_name", $user_browser->get('browser_name'));
+    }
+    /**
+     * 
+     */
     foreach ($rs->get() as $key => $value) {
       $item = new PluginWfArray($value);
       if($this->getSessionFileExist($item->get('session_id'))){
@@ -391,11 +405,13 @@ class PluginAccountAdmin_v1{
       $trs[] = wfDocument::createHtmlElement('tr', array(
         wfDocument::createHtmlElement('td', $item->get('date'), array('style' => 'font-size:smaller')),
         wfDocument::createHtmlElement('td', $item->get('type')),
-        wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
         wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR')),
         wfDocument::createHtmlElement('td', $item->get('session_id'), array('style' => 'font-size:smaller')),
         wfDocument::createHtmlElement('td', $item->get('session_file_exist_text')),
-        wfDocument::createHtmlElement('td', $item->get('session_file_time'), array('style' => 'font-size:smaller'))
+        wfDocument::createHtmlElement('td', $item->get('session_file_time'), array('style' => 'font-size:smaller')),
+        wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
+        wfDocument::createHtmlElement('td', $item->get('os_name')),
+        wfDocument::createHtmlElement('td', $item->get('browser_name'))
       ));
     }
     $page->setById('tbody_account_log', 'innerHTML', $trs);

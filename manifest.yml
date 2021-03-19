@@ -1,5 +1,9 @@
-version: 1.9.2
+version: 1.9.3
 history:
+  1.9.3:
+    date: '2021-03-19'
+    title: Browser detection
+    description: 'Add browser detection on log in view.'
   1.9.2:
     date: '2021-03-19'
     title: View modal

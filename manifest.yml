@@ -1,5 +1,9 @@
-version: 1.9.1
+version: 1.9.2
 history:
+  1.9.2:
+    date: '2021-03-19'
+    title: View modal
+    description: 'View modal larger.'
   1.9.1:
     date: '2020-11-17'
     title: Version

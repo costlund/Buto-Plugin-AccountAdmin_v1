@@ -1,5 +1,9 @@
-version: 1.9.6
+version: 1.9.7
 history:
+  1.9.7:
+    date: '2021-06-02'
+    title: Versions
+    description: 'Versions update.'
   1.9.6:
     date: '2021-06-02'
     title: Versions
@@ -127,7 +131,7 @@ plugin:
     version: '1.1'
   -
     name: wf/bootstrapjs
-    version: '1.6'
+    version: 1.7.1
   -
     name: wf/dom
     version: '1.0'
@@ -157,10 +161,10 @@ plugin:
     version: 1.23.0
   -
     name: bootstrap/navtabs_v1
-    version: 1.2.0
+    version: 1.2.1
   -
     name: theme/include
-    version: 1.8.4
+    version: 1.8.5
 sys:
   -
     name: mercury

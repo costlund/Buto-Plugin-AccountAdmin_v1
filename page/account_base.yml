@@ -69,10 +69,27 @@
                   innerHTML: rs:phone
                 -
                   type: th
+                  innerHTML: Language
+                -
+                  type: td
+                  innerHTML: rs:language
+            -
+              type: tr
+              innerHTML:
+                -
+                  type: th
                   innerHTML: Activated
                 -
                   type: td
                   innerHTML: rs:activated_text
+                -
+                  type: th
+                -
+                  type: td
+                -
+                  type: th
+                -
+                  type: td
 -
   type: h2
   innerHTML: Management

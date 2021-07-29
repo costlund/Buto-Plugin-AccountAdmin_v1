@@ -268,11 +268,25 @@ class PluginAccountAdmin_v1{
       $form->set('items/username/default', $rs->get('username'));
       $form->set('items/password/default', $rs->get('password'));
       $form->set('items/phone/default', $rs->get('phone'));
+      $form->set('items/language/default', $rs->get('language'));
       $form->set('items/activated/default', $rs->get('activated'));
     }else{
       $form->set('items/username/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
       $form->set('items/password/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
     }
+    /**
+     language options
+     */
+    if(wfConfig::getI18nLanguages()){
+      $languages = array();
+      $languages[''] = '';
+      foreach(wfConfig::getI18nLanguages() as $v){
+        $languages[$v] = $v;
+      }
+      $form->set('items/language/option', $languages);
+    }
+    /**
+     */
     return $form->get();
   }
   public function frm_account_role_form_render($form){
@@ -317,6 +331,7 @@ class PluginAccountAdmin_v1{
     $this->sql->set('account_capture_update/params/username/value', $form->get('items/username/post_value'));
     $this->sql->set('account_capture_update/params/password/value', $form->get('items/password/post_value'));
     $this->sql->set('account_capture_update/params/phone/value', $form->get('items/phone/post_value'));
+    $this->sql->set('account_capture_update/params/language/value', $form->get('items/language/post_value'));
     $this->sql->set('account_capture_update/params/activated/value', $form->get('items/activated/post_value'));
     $this->executeSQL($this->sql->get('account_capture_update'));
     if(!$new){

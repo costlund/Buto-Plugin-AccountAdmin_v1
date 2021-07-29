@@ -32,6 +32,9 @@ items:
   phone:
     type: varchar
     label: Phone
+  language:
+    type: varchar
+    label: Language
   activated:
     type: varchar
     label: Activated

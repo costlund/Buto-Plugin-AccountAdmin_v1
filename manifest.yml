@@ -1,5 +1,9 @@
-version: 1.9.8
+version: 1.10.0
 history:
+  1.10.0:
+    date: '2021-07-29'
+    title: Language
+    description: 'Add language to view and form.'
   1.9.8:
     date: '2021-06-16'
     title: Versions

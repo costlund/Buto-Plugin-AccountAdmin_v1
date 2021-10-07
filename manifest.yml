@@ -1,5 +1,9 @@
-version: 1.10.1
+version: 1.10.2
 history:
+  1.10.2:
+    date: '2021-10-07'
+    title: List
+    description: 'Performance improvement.'
   1.10.1:
     date: '2021-09-27'
     title: Versions

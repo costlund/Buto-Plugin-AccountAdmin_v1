@@ -10,6 +10,12 @@ class PluginAccountAdmin_v1{
   private $i18n = null;
   function __construct($buto = false) {
     if($buto){
+      /**
+       */
+      set_time_limit(120);
+      ini_set('memory_limit', '2048M');
+      /**
+       */
       if(!wfUser::hasRole("webadmin")){
         exit('Role webadmin is required!');
       }
@@ -60,47 +66,31 @@ class PluginAccountAdmin_v1{
     $page->setByTag(array('script' => "var app = {class: '".wfArray::get($GLOBALS, 'sys/class')."'};"));
     wfDocument::mergeLayout($page->get());
   }
+  private function get_accounts(){
+    $rs = $this->executeSQL($this->sql->get('accounts'));
+    wfPlugin::includeonce('browser/detection_v1');
+    $browser = new PluginBrowserDetection_v1();    
+    foreach ($rs->get() as $key => $value){
+      $item = new PluginWfArray($value);
+      $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
+      $rs->set("$key/os_name", $user_browser->get('os_name'));
+      $rs->set("$key/browser_name", $user_browser->get('browser_name'));
+    }
+    return $rs;
+  }
+  public function page_accounts_data(){
+    $this->init();
+    $data = $this->get_accounts();
+    wfPlugin::includeonce('datatable/datatable_1_10_18');
+    $datatable = new PluginDatatableDatatable_1_10_18();
+    exit($datatable->set_table_data($data->get()));
+  }
   public function page_accounts(){
     $this->init();
-    $rs = $this->executeSQL($this->sql->get('accounts'));
-    /**
-     * 
-     */
-    wfPlugin::includeonce('browser/detection_v1');
-    $browser = new PluginBrowserDetection_v1();
     /**
      * 
      */
     $page = $this->getYml('page/accounts.yml');
-    $trs = array();
-    foreach ($rs->get() as $key => $value) {
-      $item = new PluginWfArray($value);
-      /**
-       * 
-       */
-      $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
-      /**
-       * 
-       */
-      $onclick = "PluginAccountAdmin_v1.account_view('".$item->get('id')."');";
-      $trs[] = wfDocument::createHtmlElement('tr', array(
-      wfDocument::createHtmlElement('td', $item->get('email')),
-      wfDocument::createHtmlElement('td', $item->get('username')),
-      wfDocument::createHtmlElement('td', $item->get('activated')),
-      wfDocument::createHtmlElement('td', $item->get('activate_date')),
-      wfDocument::createHtmlElement('td', $item->get('change_email_date')),
-      wfDocument::createHtmlElement('td', $item->get('phone')),
-      wfDocument::createHtmlElement('td', $item->get('two_factor_authentication_date')),
-      wfDocument::createHtmlElement('td', $item->get('created_at')),
-      wfDocument::createHtmlElement('td', $item->get('updated_at')),
-      wfDocument::createHtmlElement('td', $item->get('roles')),
-      wfDocument::createHtmlElement('td', $item->get('log_date')),
-      wfDocument::createHtmlElement('td', $user_browser->get('os_name')),
-      wfDocument::createHtmlElement('td', $user_browser->get('browser_name')),
-      wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT'))
-      ), array('style' => 'cursor:pointer', 'onclick' => $onclick));
-    }
-    $page->setById('tbody', 'innerHTML', $trs);
     wfDocument::renderElement($page->get());
   }
   private function get_browser_detection(){

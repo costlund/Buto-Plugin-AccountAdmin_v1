@@ -4,89 +4,38 @@
     onclick: "PluginWfAjax.update('desktop_content');"
   innerHTML: Accounts
 -
-  type: div
-  attribute:
-    class: 'table-responsive'
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: table
-        id: table_accounts
-      innerHTML:
-        thead:
-          type: thead
-          innerHTML:
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: 'Email'
-                -
-                  type: th
-                  innerHTML: 'Username'
-                -
-                  type: th
-                  innerHTML: 'Activated'
-                -
-                  type: th
-                  innerHTML: 'Activated date'
-                -
-                  type: th
-                  innerHTML: 'Change email date'
-                -
-                  type: th
-                  innerHTML: 'Phone'
-                -
-                  type: th
-                  innerHTML: 'TFA date'
-                -
-                  type: th
-                  innerHTML: 'Created at'
-                -
-                  type: th
-                  innerHTML: 'Updated at'
-                -
-                  type: th
-                  innerHTML: 'Roles'
-                -
-                  type: th
-                  innerHTML: 'Log date'
-                -
-                  type: th
-                  innerHTML: Platform
-                -
-                  type: th
-                  innerHTML: Browser
-                -
-                  type: th
-                  innerHTML: 'User agent'
-        tbody:
-          type: tbody
-          attribute:
-            id: tbody
-        datatable:
-          type: widget
-          data:
-            plugin: datatable/datatable_1_10_18
-            method: run
-            data:
-              id: table_accounts
-              json:
-                paging: true
-                iDisplayLength: 10
-                ordering: true
-                info: true
-                searching: true
-                order:
-                  -
-                    - 0
-                    - desc
-                language:
-                  url: /plugin/datatable/datatable_1_10_18/i18n/Swedish.json
-                dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>><'row'<'col-sm-12 col-md-6'B>>"
-                buttons:
-                  -
-                    extend: excel
-                    title: ExportAccounts
+  type: widget
+  data:
+    plugin: wf/table
+    method: render_many
+    data:
+      id: _my_table_id_
+      class:
+        table: table-sm table-striped
+      field:
+        email: Email
+        username: Username
+        activated: 'Activated'
+        activate_date: 'Activated date'
+        change_email_date: 'Change email date'
+        phone: 'Phone'
+        two_factor_authentication_date: 'TFA date'
+        created_at: 'Created at'
+        updated_at: 'Updated at'
+        roles: 'Roles'
+        log_date: 'Log date'
+        os_name: Platform
+        browser_name: Browser
+        HTTP_USER_AGENT: 'User agent'
+      datatable:
+        ajax: /users/accounts_data
+        order:
+          -
+            - 0
+            - asc
+-
+  type: script
+  innerHTML: |
+    $('#_my_table_id_ tbody').on( 'click', 'tr', function () {
+        PluginAccountAdmin_v1.account_view(datatable__my_table_id_.row( this ).data().id);
+    } );

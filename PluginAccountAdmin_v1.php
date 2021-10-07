@@ -376,6 +376,11 @@ class PluginAccountAdmin_v1{
   public function page_account_log(){
     $this->init();
     $page = $this->getYml('page/account_log.yml');
+    $page->setByTag(array('url' => '/users/account_log_data?id='.wfRequest::get('id')));
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_log_data(){
+    $this->init();
     $this->sql->set('account_log/params/account_id/value', wfRequest::get('id'));
     $rs = $this->executeSQL($this->sql->get('account_log'));
     /**
@@ -404,23 +409,11 @@ class PluginAccountAdmin_v1{
         $rs->set($key.'/session_file_time', null);
       }
     }
-    $trs = array();
-    foreach ($rs->get() as $key => $value) {
-      $item = new PluginWfArray($value);
-      $trs[] = wfDocument::createHtmlElement('tr', array(
-        wfDocument::createHtmlElement('td', $item->get('date'), array('style' => 'font-size:smaller')),
-        wfDocument::createHtmlElement('td', $item->get('type')),
-        wfDocument::createHtmlElement('td', $item->get('REMOTE_ADDR')),
-        wfDocument::createHtmlElement('td', $item->get('session_id'), array('style' => 'font-size:smaller')),
-        wfDocument::createHtmlElement('td', $item->get('session_file_exist_text')),
-        wfDocument::createHtmlElement('td', $item->get('session_file_time'), array('style' => 'font-size:smaller')),
-        wfDocument::createHtmlElement('td', $item->get('HTTP_USER_AGENT')),
-        wfDocument::createHtmlElement('td', $item->get('os_name')),
-        wfDocument::createHtmlElement('td', $item->get('browser_name'))
-      ));
-    }
-    $page->setById('tbody_account_log', 'innerHTML', $trs);
-    wfDocument::renderElement($page->get());
+    /*
+    */    
+    wfPlugin::includeonce('datatable/datatable_1_10_18');
+    $datatable = new PluginDatatableDatatable_1_10_18();
+    exit($datatable->set_table_data($rs->get()));
   }
   public function page_account_roles(){
     $this->init();

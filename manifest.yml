@@ -1,5 +1,9 @@
-version: 1.10.2
+version: 1.10.3
 history:
+  1.10.3:
+    date: '2021-10-07'
+    title: 'Account log'
+    description: 'Performance improvement.'
   1.10.2:
     date: '2021-10-07'
     title: List

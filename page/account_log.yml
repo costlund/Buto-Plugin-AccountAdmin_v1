@@ -1,66 +1,25 @@
 -
-  type: div
-  attribute:
-    class: table-responsive
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: 'table table-condensed'
-        id: table_account_log
-      innerHTML:
-        thead:
-          type: thead
-          innerHTML:
-            tr:
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: 'Date'
-                -
-                  type: th
-                  innerHTML: 'Type'
-                -
-                  type: th
-                  innerHTML: 'IP'
-                -
-                  type: th
-                  innerHTML: 'Session ID'
-                -
-                  type: th
-                  innerHTML: 'Exist'
-                -
-                  type: th
-                  innerHTML: 'File time'
-                -
-                  type: th
-                  innerHTML: 'User agent'
-                -
-                  type: th
-                  innerHTML: 'OS'
-                -
-                  type: th
-                  innerHTML: 'Browser'
-        tbody:
-          type: tbody
-          attribute: {id: tbody_account_log}
-          innerHTML:
-    -
-      type: widget
-      data:
-        plugin: datatable/datatable_1_10_18
-        method: run
-        data:
-          id: table_account_log
-          json:
-            paging: true
-            ordering: true
-            info: true
-            searching: true
-            order:
-              -
-                - 0
-                - desc
-            language:
-              url: /plugin/datatable/datatable_1_10_18/i18n/Swedish.json
+  type: widget
+  data:
+    plugin: wf/table
+    method: render_many
+    data:
+      id: table_account_log
+      class:
+        table: table-sm table-striped
+      field:
+        date: Date
+        type: Type
+        REMOTE_ADDR: IP
+        session_id: 'Session ID'
+        session_file_exist_text: Exist
+        session_file_time: 'File time'
+        HTTP_USER_AGENT: 'User agent'
+        os_name: OS
+        browser_name: Browser
+      datatable:
+        ajax: rs:url
+        order:
+          -
+            - 0
+            - asc

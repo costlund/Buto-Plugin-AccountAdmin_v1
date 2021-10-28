@@ -1,5 +1,9 @@
-version: 1.10.3
+version: 1.10.4
 history:
+  1.10.4:
+    date: '2021-10-28'
+    title: 'Account log'
+    description: 'Sort desc by date.'
   1.10.3:
     date: '2021-10-07'
     title: 'Account log'

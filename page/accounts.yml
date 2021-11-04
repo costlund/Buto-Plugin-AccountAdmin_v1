@@ -24,6 +24,7 @@
         updated_at: 'Updated at'
         roles: 'Roles'
         log_date: 'Log date'
+        log_type: 'Log type'
         os_name: Platform
         browser_name: Browser
         HTTP_USER_AGENT: 'User agent'

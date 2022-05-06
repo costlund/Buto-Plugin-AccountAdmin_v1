@@ -84,8 +84,10 @@
                   innerHTML: rs:activated_text
                 -
                   type: th
+                  innerHTML: Full name
                 -
                   type: td
+                  innerHTML: rs:fullname
                 -
                   type: th
                 -

@@ -76,7 +76,8 @@ account:
     date_format(a.created_at, '%y%m%d %H:%i') as created_at,
     date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
     (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id,
-    a.language
+    a.language,
+    a.fullname
     from account as a
     where a.id=?
     ;
@@ -103,6 +104,7 @@ account:
     - updated_at
     - session_id
     - language
+    - fullname
   params:
     account_id:
       type: s
@@ -186,7 +188,7 @@ account_role_delete:
     account_id:
       type: s
 account_capture_update:
-  sql: "update account set email=?, username=?, password=?, phone=?, language=?, activated=?, updated_by='[user_id]', updated_at=now() where id=?;"
+  sql: "update account set email=?, username=?, password=?, phone=?, language=?, activated=?, updated_by='[user_id]', updated_at=now(), fullname=? where id=?;"
   params:
     email:
       type: s
@@ -200,6 +202,8 @@ account_capture_update:
       type: s
     activated:
       type: i
+    fullname:
+      type: s
     id:
       type: s
 account_capture_insert:

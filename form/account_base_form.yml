@@ -32,6 +32,10 @@ items:
   phone:
     type: varchar
     label: Phone
+  fullname:
+    type: varchar
+    label: Full name
+    placeholder: 'Text (1-255)'
   language:
     type: varchar
     label: Language

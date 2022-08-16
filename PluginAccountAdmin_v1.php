@@ -477,7 +477,7 @@ class PluginAccountAdmin_v1{
     $form = new PluginWfArray($form);
     if($form->get("items/$field/is_valid") && $form->get("items/$field/post_value")){
       if($field=='username'){
-        $rs = $this->db_account_username_exist($form->get("items/id/post_value"), $form->get("items/$field/post_value"));
+        $rs = $this->db_account_username_exist($form->get("items/$field/post_value"));
       }elseif($field=='email'){
         $rs = $this->db_account_email_exist($form->get("items/id/post_value"), $form->get("items/$field/post_value"));
       }else{
@@ -530,7 +530,7 @@ class PluginAccountAdmin_v1{
     }
     return $form->get();
   }
-  private function db_account_username_exist($id, $username){
+  private function db_account_username_exist($username){
     $this->init();
     $this->sql->set('account_select_one_by_username/params/username/value', $username);
     $rs = $this->executeSQL($this->sql->get('account_select_one_by_username'), true);

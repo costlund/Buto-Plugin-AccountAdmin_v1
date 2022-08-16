@@ -1,5 +1,9 @@
-version: 1.12.5
+version: 1.12.6
 history:
+  1.12.6:
+    date: '2022-08-16'
+    title: Clean up
+    description: 'Removed not used id param in method db_account_username_exist.'
   1.12.5:
     date: '2022-08-11'
     title: Versions

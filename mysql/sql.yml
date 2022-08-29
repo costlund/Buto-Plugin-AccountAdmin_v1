@@ -4,6 +4,7 @@ accounts:
     a.id,
     a.email,
     a.username,
+    a.fullname,
     a.password,
     if(a.activated=1, 'Yes', 'No') as activated,
     a.activate_key,
@@ -31,6 +32,7 @@ accounts:
     - id
     - email
     - username
+    - fullname
     - password
     - activated
     - activate_key

@@ -1,5 +1,9 @@
-version: 1.12.6
+version: 1.13.0
 history:
+  1.13.0:
+    date: '2022-08-29'
+    title: List
+    description: 'Add full name to list.'
   1.12.6:
     date: '2022-08-16'
     title: Clean up

@@ -13,8 +13,9 @@
       class:
         table: table-sm table-striped
       field:
-        email: Email
         username: Username
+        fullname: Full name
+        email: Email
         activated: 'Activated'
         activate_date: 'Activated date'
         change_email_date: 'Change email date'

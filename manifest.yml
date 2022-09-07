@@ -1,5 +1,9 @@
-version: 1.13.2
+version: 1.13.3
 history:
+  1.13.3:
+    date: '2022-09-07'
+    title: Versions
+    description: 'Versions update.'
   1.13.2:
     date: '2022-08-31'
     title: Versions
@@ -235,7 +239,7 @@ plugin:
     version: 1.5.1
   -
     name: form/form_v1
-    version: 1.53.0
+    version: 1.54.0
   -
     name: wf/embed
     version: 1.1.1

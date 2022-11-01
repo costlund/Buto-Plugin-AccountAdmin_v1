@@ -261,6 +261,7 @@ class PluginAccountAdmin_v1{
       $form->set('items/language/default', $rs->get('language'));
       $form->set('items/activated/default', $rs->get('activated'));
       $form->set('items/fullname/default', $rs->get('fullname'));
+      $form->set('items/pid/default', $rs->get('pid'));
     }else{
       $form->set('items/username/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
       $form->set('items/password/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
@@ -325,6 +326,7 @@ class PluginAccountAdmin_v1{
     $this->sql->set('account_capture_update/params/language/value', $form->get('items/language/post_value'));
     $this->sql->set('account_capture_update/params/activated/value', $form->get('items/activated/post_value'));
     $this->sql->set('account_capture_update/params/fullname/value', $form->get('items/fullname/post_value'));
+    $this->sql->set('account_capture_update/params/pid/value', $form->get('items/pid/post_value'));
     $this->executeSQL($this->sql->get('account_capture_update'));
     if(!$new){
       return array("PluginWfAjax.update('tab_account_base');$('#account_base_form').modal('hide');");

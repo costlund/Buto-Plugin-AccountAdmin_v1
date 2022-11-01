@@ -5,6 +5,7 @@ accounts:
     a.email,
     a.username,
     a.fullname,
+    a.pid,
     a.password,
     if(a.activated=1, 'Yes', 'No') as activated,
     a.activate_key,
@@ -33,6 +34,7 @@ accounts:
     - email
     - username
     - fullname
+    - pid
     - password
     - activated
     - activate_key
@@ -79,7 +81,8 @@ account:
     date_format(a.updated_at, '%y%m%d %H:%i') as updated_at,
     (select session_id from account_log where account_id=a.id order by date desc limit 1) as session_id,
     a.language,
-    a.fullname
+    a.fullname,
+    a.pid
     from account as a
     where a.id=?
     ;
@@ -107,6 +110,7 @@ account:
     - session_id
     - language
     - fullname
+    - pid
   params:
     account_id:
       type: s
@@ -190,7 +194,7 @@ account_role_delete:
     account_id:
       type: s
 account_capture_update:
-  sql: "update account set email=?, username=?, password=?, phone=?, language=?, activated=?, updated_by='[user_id]', updated_at=now(), fullname=? where id=?;"
+  sql: "update account set email=?, username=?, password=?, phone=?, language=?, activated=?, updated_by='[user_id]', updated_at=now(), fullname=?, pid=? where id=?;"
   params:
     email:
       type: s
@@ -205,6 +209,8 @@ account_capture_update:
     activated:
       type: i
     fullname:
+      type: s
+    pid:
       type: s
     id:
       type: s

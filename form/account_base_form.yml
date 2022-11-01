@@ -36,6 +36,12 @@ items:
     type: varchar
     label: Full name
     placeholder: 'Text (1-255)'
+  pid:
+    type: varchar
+    label: PID
+    info:
+      text: 'Format 196706228572'
+    placeholder: 'Text (12)'
   language:
     type: varchar
     label: Language

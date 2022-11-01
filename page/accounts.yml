@@ -15,6 +15,7 @@
       field:
         username: Username
         fullname: Full name
+        pid: PID
         email: Email
         activated: 'Activated'
         activate_date: 'Activated date'

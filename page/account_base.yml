@@ -90,8 +90,10 @@
                   innerHTML: rs:fullname
                 -
                   type: th
+                  innerHTML: PID
                 -
                   type: td
+                  innerHTML: rs:pid
 -
   type: h2
   innerHTML: Management

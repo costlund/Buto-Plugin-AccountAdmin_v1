@@ -1,5 +1,9 @@
-version: 1.14.2
+version: 1.14.3
 history:
+  1.14.3:
+    date: '2023-02-02'
+    title: Versions
+    description: 'Versions update.'
   1.14.2:
     date: '2023-02-01'
     title: Versions
@@ -285,10 +289,10 @@ plugin:
     version: 1.32.1
   -
     name: bootstrap/navtabs_v1
-    version: 1.4.0
+    version: 1.5.0
   -
     name: theme/include
-    version: 1.16.1
+    version: 1.16.2
 sys:
   -
     name: mercury

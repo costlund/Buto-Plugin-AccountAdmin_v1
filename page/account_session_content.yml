@@ -1,4 +1,11 @@
 -
-  type: pre
-  innerHTML: rs:session_content_text
-  
+  type: widget
+  data:
+    plugin: wf/table
+    method: render_one
+    data:
+      key_is_missing_alert: true
+      i18n: false
+      rs: rs:session_content
+      class:
+        table: table-sm table-striped

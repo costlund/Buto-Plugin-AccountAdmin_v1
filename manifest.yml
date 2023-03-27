@@ -1,5 +1,9 @@
-version: 1.14.7
+version: 1.14.8
 history:
+  1.14.8:
+    date: '2023-03-27'
+    title: Versions
+    description: 'Versions update.'
   1.14.7:
     date: '2023-03-22'
     title: Versions
@@ -308,7 +312,7 @@ plugin:
     version: 1.7.0
   -
     name: theme/include
-    version: 1.17.0
+    version: 1.19.0
 sys:
   -
     name: mercury

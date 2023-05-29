@@ -1,5 +1,9 @@
-version: 1.14.10
+version: 1.14.11
 history:
+  1.14.11:
+    date: '2023-05-29'
+    title: Versions
+    description: 'Versions update.'
   1.14.10:
     date: '2023-05-29'
     title: Versions
@@ -263,7 +267,7 @@ history:
 plugin:
   -
     name: i18n/translate_v1
-    version: 1.10.0
+    version: 1.11.0
   -
     name: wf/array
     version: 1.2.4
@@ -320,7 +324,7 @@ plugin:
     version: 1.8.0
   -
     name: theme/include
-    version: 1.20.1
+    version: 1.20.2
 sys:
   -
     name: mercury

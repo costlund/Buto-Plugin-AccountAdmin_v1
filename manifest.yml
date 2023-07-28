@@ -1,5 +1,9 @@
-version: 1.14.11
+version: 1.14.12
 history:
+  1.14.12:
+    date: '2023-07-28'
+    title: Versions
+    description: 'Versions update.'
   1.14.11:
     date: '2023-05-29'
     title: Versions
@@ -267,7 +271,7 @@ history:
 plugin:
   -
     name: i18n/translate_v1
-    version: 1.11.0
+    version: 1.12.0
   -
     name: wf/array
     version: 1.2.4
@@ -303,7 +307,7 @@ plugin:
     version: 1.5.5
   -
     name: form/form_v1
-    version: 1.59.0
+    version: 1.59.1
   -
     name: wf/embed
     version: 1.2.0
@@ -324,7 +328,7 @@ plugin:
     version: 1.8.0
   -
     name: theme/include
-    version: 1.20.2
+    version: 1.20.4
 sys:
   -
     name: mercury

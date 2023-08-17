@@ -56,7 +56,7 @@ class PluginAccountAdmin_v1{
   }
   public function page_desktop(){
     $this->init();
-    wfArray::set($GLOBALS, 'sys/layout_path', '/plugin/account/admin_v1/layout');
+    wfGlobals::setSys('layout_path', '/plugin/account/admin_v1/layout');
     $page = $this->getYml('page/desktop.yml');
     $page->setByTag($this->settings->get('mysql'));  
     /**
@@ -262,8 +262,8 @@ class PluginAccountAdmin_v1{
       $form->set('items/fullname/default', $rs->get('fullname'));
       $form->set('items/pid/default', $rs->get('pid'));
     }else{
-      $form->set('items/username/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
-      $form->set('items/password/default', substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
+      $form->set('items/username/default', wfPhpfunc::substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
+      $form->set('items/password/default', wfPhpfunc::substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
     }
     /**
      language options

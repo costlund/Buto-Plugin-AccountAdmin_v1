@@ -36,7 +36,6 @@
                       type: 'time'
                       time:
                         unit: day
-                    "y": {}
         -
           type: widget
           attribute:

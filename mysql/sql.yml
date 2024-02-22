@@ -155,6 +155,17 @@ account_log:
   params:
     account_id:
       type: s
+chart_account_log:
+  sql: |
+    select 
+    left(date,10) as x
+    ,count(id) as y
+    from account_log
+    where date>date_add(left(now(),10), INTERVAL -365 DAY)
+    group by left(date,10);
+  select:
+    - x
+    - y
 account_roles:
   sql: "select id, role from account_role where account_id=? order by role;"
   select:

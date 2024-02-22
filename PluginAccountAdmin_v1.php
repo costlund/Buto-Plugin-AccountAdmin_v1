@@ -22,6 +22,7 @@ class PluginAccountAdmin_v1{
       wfPlugin::includeonce('i18n/translate_v1');
       $this->i18n = new PluginI18nTranslate_v1();
       wfPlugin::enable('form/form_v1');
+      wfPlugin::enable('chart/chartjs_4_4_1');
     }
   }
   private function init(){
@@ -439,6 +440,10 @@ class PluginAccountAdmin_v1{
     $account_log = $this->getAccountLog();
     $element->setByTag(array('account_log' => $account_log->get()));
     $element->setById('chart_signin', 'data/data/mysql_conn', $this->settings->get('mysql'));
+    if(wfUser::hasRole('webmaster')){
+      $chart_data = $this->db_chart_account_log();
+      $element->setByTag(array('data' => $chart_data->get()), 'chart');
+    }
     wfDocument::renderElement($element->get());
   }
   private function getAccountLog(){
@@ -543,6 +548,10 @@ class PluginAccountAdmin_v1{
     $rs = $this->executeSQL($this->sql->get('account_select_one_by_email'), true);
     return $rs;
   }
+  private function db_chart_account_log(){
+    $this->init();
+    $sql = new PluginWfYml(__DIR__.'/mysql/sql.yml', 'chart_account_log');
+    $rs = $this->executeSQL($sql->get(), false);
+    return $rs;
+  }
 }
-
-

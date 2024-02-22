@@ -1,0 +1,121 @@
+readme:
+  name: Buto-Plugin-AccountAdmin_v1
+  description: Handle account tables in db.
+  item:
+    -
+      name: Settings
+      description: |
+        This example is for url /accountadmin/desktop.
+        ```
+        accountadmin:
+          plugin: 'account/admin_v1'
+          settings:
+            mysql: 'yml:/../buto_data/theme/[theme]/mysql.yml'
+        ```
+        Url.
+        ```
+        /accountadmin/desktop
+        ```
+    -
+      name: Usage
+    -
+      name: Pages
+      item:
+        -
+          name: page_account_base
+        -
+          name: page_account_base_capture
+        -
+          name: page_account_base_form
+        -
+          name: page_account_delete
+        -
+          name: page_account_delete_yes
+        -
+          name: page_account_log
+        -
+          name: page_account_log_data
+        -
+          name: page_account_role_capture
+        -
+          name: page_account_role_delete
+        -
+          name: page_account_role_form
+        -
+          name: page_account_roles
+        -
+          name: page_account_session_content
+        -
+          name: page_account_session_delete
+        -
+          name: page_account_view
+        -
+          name: page_accounts
+        -
+          name: page_accounts_data
+        -
+          name: page_desktop
+        -
+          name: page_stat_browser
+        -
+          name: page_stat_os
+        -
+          name: page_stat_signin
+    -
+      name: Widgets
+      item: {  }
+    -
+      name: Event
+      item: {  }
+    -
+      name: Construct
+      item:
+        -
+          name: __construct
+    -
+      name: Methods
+      item:
+        -
+          name: init
+        -
+          name: get_accounts
+        -
+          name: get_browser_detection
+        -
+          name: get_element_stat
+        -
+          name: getAccount
+        -
+          name: getSessionFilename
+        -
+          name: getSessionFileExist
+        -
+          name: getSessionFileTime
+        -
+          name: frm_account_base_form_render
+        -
+          name: frm_account_role_form_render
+        -
+          name: db_role_select_one
+        -
+          name: frm_account_base_form_capture
+        -
+          name: frm_account_role_form_capture
+        -
+          name: createAccount
+        -
+          name: getAccountLog
+        -
+          name: getYml
+        -
+          name: runSQL
+        -
+          name: executeSQL
+        -
+          name: validate_username_or_email
+        -
+          name: validate_role
+        -
+          name: db_account_username_exist
+        -
+          name: db_account_email_exist

@@ -10,6 +10,35 @@
       innerHTML:
         -
           type: widget
+          settings:
+            role:
+              item:
+                - webmaster
+          data:
+            plugin: chart/chartjs_4_4_1
+            method: chart
+            data:
+              data:
+                id: my_chart_line_time
+                height: 300
+              config:
+                type: bar
+                data:
+                  datasets:
+                    -
+                      label: 'Sign in by date'
+                      data: chart:data
+                options:
+                  responsive: true
+                  maintainAspectRatio: false
+                  scales:
+                    x:
+                      type: 'time'
+                      time:
+                        unit: day
+                    "y": {}
+        -
+          type: widget
           attribute:
             id: chart_signin
           data:

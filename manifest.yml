@@ -1,5 +1,9 @@
-version: 1.15.3
+version: 1.15.4
 history:
+  1.15.4:
+    date: '2024-03-14'
+    title: Chartjs
+    description: 'Add plugin chart/chartjs_4_4_1 to manifest.'
   1.15.3:
     date: '2024-02-22'
     title: Chartjs
@@ -345,6 +349,9 @@ plugin:
   -
     name: theme/include
     version: 1.21.0
+  -
+    name: chart/chartjs_4_4_1
+    version: 1.1.5
 sys:
   -
     name: mercury

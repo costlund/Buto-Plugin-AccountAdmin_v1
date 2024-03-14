@@ -11,7 +11,7 @@
   plugin: 'account/admin_v1'
   settings:
     mysql: 'yml:/../buto_data/theme/[theme]/mysql.yml'</code></pre>
-<p>Url</p>
+<p>Url.</p>
 <pre><code>/accountadmin/desktop</code></pre>
 
 <a name="key_1"></a>

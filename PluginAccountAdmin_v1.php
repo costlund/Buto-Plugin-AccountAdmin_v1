@@ -437,13 +437,17 @@ class PluginAccountAdmin_v1{
   public function page_stat_signin(){
     $this->init();
     $element = $this->getYml('page/stat_signin.yml');
-    $account_log = $this->getAccountLog();
-    $element->setByTag(array('account_log' => $account_log->get()));
-    $element->setById('chart_signin', 'data/data/mysql_conn', $this->settings->get('mysql'));
-    if(wfUser::hasRole('webmaster')){
-      $chart_data = $this->db_chart_account_log();
-      $element->setByTag(array('data' => $chart_data->get()), 'chart');
-    }
+    /**
+     * list data
+     */
+    $element->setByTag(array('account_log' => $this->getAccountLog()->get()));
+    /**
+     * chart data
+     */
+    $element->setByTag(array('data' => $this->db_chart_account_log()->get()), 'chart');
+    /**
+     * 
+     */
     wfDocument::renderElement($element->get());
   }
   private function getAccountLog(){

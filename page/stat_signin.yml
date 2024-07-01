@@ -10,10 +10,6 @@
       innerHTML:
         -
           type: widget
-          settings:
-            role:
-              item:
-                - webmaster
           data:
             plugin: chart/chartjs_4_4_1
             method: chart
@@ -36,71 +32,6 @@
                       type: 'time'
                       time:
                         unit: day
-        -
-          type: widget
-          attribute:
-            id: chart_signin
-          data:
-            plugin: 'chart/amcharts_v3'
-            method: serial
-            data:
-              mysql_conn: '_set_in_action_'
-              mysql_query: |
-                select 
-                left(date,10) as date, 
-                count(id) as antal
-                from account_log
-                where date>date_add(left(now(),10), INTERVAL -10 DAY)
-                group by left(date,10);
-              chart:
-                id: chart_signin
-                style: "width:100%;height:300px;"
-                data:
-                  type: serial
-                  categoryField: date
-                  dataDateFormat: YYYY-MM-DD
-                  startDuration: 1
-                  categoryAxis:
-                    gridPosition: start
-                    parseDates: true
-                  chartCursor:
-                    enabled: true
-                  chartScrollbar:
-                    enabled: true
-                  trendLineszzz:
-                  "graphs":
-                    -
-                      id: "AmGraph-1"
-                      title: "Number"
-                      valueField: "antal"
-                      type: column
-                      fillAlphas: 1
-                  "guideszzz":
-                  "valueAxes":
-                    -
-                      "id": "ValueAxis-1"
-                      "title": "Sign in"
-                      integersOnly: true
-                  "allLabelszzz":
-                  "balloonzzz":
-                  titles:
-                    -
-                      id: "Title-1"
-                      size: 15
-                      text: "Sign in by date"
-                  dataProvider:
-                    -
-                      date: "2014-03-01"
-                      antal: 8
-                    -
-                      date: "2014-03-02"
-                      antal: 16
-                    -
-                      date: "2014-03-22"
-                      antal: 16
-                  legend:
-                    enabled: false
-                    useGraphSettings: true
     -
       type: div
       attribute:

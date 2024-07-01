@@ -1,5 +1,9 @@
-version: 1.15.4
+version: 1.15.5
 history:
+  1.15.5:
+    date: '2024-07-01'
+    title: amCharts
+    description: 'Remove plugin chart/amcharts_v3.'
   1.15.4:
     date: '2024-03-14'
     title: Chartjs

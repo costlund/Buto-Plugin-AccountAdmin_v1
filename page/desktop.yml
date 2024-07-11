@@ -2,7 +2,7 @@ settings:
   layout:
     - html
     - main
-  title: AccountAdmin_v1
+  title: Users
 content:
   -
     type: p

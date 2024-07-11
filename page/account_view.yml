@@ -24,10 +24,32 @@
           type: strong
           attribute:
             class: content-colon
+          innerHTML: Email
+        - 
+          type: span
+          innerHTML: rs:email
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
           innerHTML: Username
         - 
           type: span
           innerHTML: rs:username
+    -
+      type: div
+      innerHTML:
+        - 
+          type: strong
+          attribute:
+            class: content-colon
+          innerHTML: Full name
+        - 
+          type: span
+          innerHTML: rs:fullname
 -
   type: widget
   data:

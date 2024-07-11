@@ -15,6 +15,7 @@
       field:
         username: Username
         fullname: Full name
+        has_image: Image
         pid: PID
         email: Email
         activated: 'Activated'
@@ -30,7 +31,6 @@
         os_name: Platform
         browser_name: Browser
         HTTP_USER_AGENT: 'User agent'
-        has_image: Image
       datatable:
         ajax: /users/accounts_data
         order:

@@ -19,10 +19,9 @@ content:
               method: include
               data:
                 bootswatch:
-                  theme: Cerulean          
-          -
-            type: title
-            innerHTML: 'globals:sys/page/settings/title'
+                  theme: Cerulean
+                bootstrap:
+                  version: 5
           -
             type: widget
             data:

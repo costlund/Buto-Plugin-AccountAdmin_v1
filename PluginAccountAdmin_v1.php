@@ -167,6 +167,7 @@ class PluginAccountAdmin_v1{
     $rs = $this->getAccount();
     $page = $this->getYml('page/account_base.yml');
     $page->setByTag($rs->get());
+    $page->setByTag(array('rs' => $rs->get()), 'data');
     wfDocument::renderElement($page->get());
   }
   public function page_account_session_content(){

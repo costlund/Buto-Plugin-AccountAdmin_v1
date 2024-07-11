@@ -13,6 +13,9 @@
       class:
         table: table-sm table-striped
       field:
+        id: 
+          text: id
+          visible: false
         username: Username
         fullname: Full name
         has_image: Image

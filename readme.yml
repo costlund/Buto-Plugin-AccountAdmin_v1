@@ -5,16 +5,16 @@ readme:
     -
       name: Settings
       description: |
-        This example is for url /accountadmin/desktop.
+        This example is for url /users/desktop.
         ```
-        accountadmin:
+        users:
           plugin: 'account/admin_v1'
           settings:
             mysql: 'yml:/../buto_data/theme/[theme]/mysql.yml'
         ```
         Url.
         ```
-        /accountadmin/desktop
+        /users/desktop
         ```
     -
       name: Usage

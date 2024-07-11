@@ -6,13 +6,13 @@
 
 ## Settings
 
-<p>This example is for url /accountadmin/desktop.</p>
-<pre><code>accountadmin:
+<p>This example is for url /users/desktop.</p>
+<pre><code>users:
   plugin: 'account/admin_v1'
   settings:
     mysql: 'yml:/../buto_data/theme/[theme]/mysql.yml'</code></pre>
 <p>Url.</p>
-<pre><code>/accountadmin/desktop</code></pre>
+<pre><code>/users/desktop</code></pre>
 
 <a name="key_1"></a>
 

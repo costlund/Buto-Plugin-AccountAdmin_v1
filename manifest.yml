@@ -1,5 +1,9 @@
-version: 1.15.5
+version: 1.15.6
 history:
+  1.15.6:
+    date: '2024-07-11'
+    title: Readme
+    description: Improvements.
   1.15.5:
     date: '2024-07-01'
     title: amCharts

@@ -24,6 +24,7 @@ class PluginAccountAdmin_v1{
       wfPlugin::enable('form/form_v1');
       wfPlugin::enable('chart/chartjs_4_4_1');
       wfPlugin::enable('upload/file');
+      wfPlugin::enable('bootstrap/navtabs_v1');
     }
   }
   private function init(){

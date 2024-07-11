@@ -1,5 +1,9 @@
-version: 1.16.0
+version: 1.16.1
 history:
+  1.16.1:
+    date: '2024-07-11'
+    title: Tabs
+    description: 'Add tabs in Details tab. Using plugin bootstrap/navtabs_v1.'
   1.16.0:
     date: '2024-07-11'
     title: Image

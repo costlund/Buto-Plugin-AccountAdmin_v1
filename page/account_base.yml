@@ -1,301 +1,313 @@
+
 -
-  type: div
-  attribute:
-    class: row
-  innerHTML:
-    -
-      type: div
-      attribute:
-        class: col-sm-12
-      innerHTML:
+  type: widget
+  data:
+    plugin: bootstrap/navtabs_v1
+    method: embed
+    data:
+      id: navtabs_account_base
+      item:
         -
-          type: a
-          attribute:
-            onclick: "PluginWfBootstrapjs.modal({id: 'account_delete', url: '/'+app.class+'/account_delete/id/'+app.account_id+'', lable: 'Delete account'});"
-          innerHTML: Delete
-        -
-          type: a
-          attribute:
-            onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form/id/'+app.account_id+'', lable: 'Account'});"
-          innerHTML: Edit
--
-  type: div
-  attribute:
-    class: table-responsive
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: 'table'
-      innerHTML:
-        tbody:
-          type: tbody
-          innerHTML:
+          text: Details
+          content:
             -
-              type: tr
+              type: div
+              attribute:
+                class: row
               innerHTML:
                 -
-                  type: th
-                  innerHTML: ID
-                -
-                  type: td
-                  innerHTML: rs:id
-                -
-                  type: th
-                  innerHTML: Email
-                -
-                  type: td
-                  innerHTML: rs:email
-                -
-                  type: th
-                  innerHTML: Username
-                -
-                  type: td
-                  innerHTML: rs:username
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Password
-                -
-                  type: td
-                  innerHTML: rs:password
-                -
-                  type: th
-                  innerHTML: Phone
-                -
-                  type: td
-                  innerHTML: rs:phone
-                -
-                  type: th
-                  innerHTML: Language
-                -
-                  type: td
-                  innerHTML: rs:language
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Activated
-                -
-                  type: td
-                  innerHTML: rs:activated_text
-                -
-                  type: th
-                  innerHTML: Full name
-                -
-                  type: td
-                  innerHTML: rs:fullname
-                -
-                  type: th
-                  innerHTML: PID
-                -
-                  type: td
-                  innerHTML: rs:pid
--
-  type: h2
-  innerHTML: Management
--
-  type: div
-  attribute:
-    class: table-responsive
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: 'table'
-      innerHTML:
-        tbody:
-          type: tbody
-          innerHTML:
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Activate key
-                -
-                  type: td
-                  innerHTML: rs:activate_key
-                -
-                  type: th
-                  innerHTML: Activate password
-                -
-                  type: td
-                  innerHTML: rs:activate_password
-                -
-                  type: th
-                  innerHTML: Activate date
-                -
-                  type: td
-                  innerHTML: rs:activate_date
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Change email
-                -
-                  type: td
-                  innerHTML: rs:change_email_email
-                -
-                  type: th
-                  innerHTML: Change email key
-                -
-                  type: td
-                  innerHTML: rs:change_email_key
-                -
-                  type: th
-                  innerHTML: Change email date
-                -
-                  type: td
-                  innerHTML: rs:change_email_date
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Two factor authentication key
-                -
-                  type: td
-                  innerHTML: rs:two_factor_authentication_key
-                -
-                  type: th
-                  innerHTML: Two factor authentication date
-                -
-                  type: td
-                  innerHTML: rs:two_factor_authentication_date
-                -
-                  type: th
-                  innerHTML: Cert ID
-                -
-                  type: td
-                  innerHTML: rs:cert_id
--
-  type: h2
-  innerHTML: History
--
-  type: div
-  attribute:
-    class: table-responsive
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: 'table'
-      innerHTML:
-        tbody:
-          type: tbody
-          innerHTML:
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Updated by
-                -
-                  type: td
-                  innerHTML: rs:updated_by
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Created at
-                -
-                  type: td
-                  innerHTML: rs:created_at
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Updated at
-                -
-                  type: td
-                  innerHTML: rs:updated_at
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Created by
-                -
-                  type: td
-                  innerHTML: rs:created_by
--
-  type: h2
-  innerHTML: Session
--
-  type: div
-  attribute:
-    class: table-responsive
-  innerHTML:
-    -
-      type: table
-      attribute:
-        class: 'table'
-      innerHTML:
-        tbody:
-          type: tbody
-          innerHTML:
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Session ID
-                -
-                  type: td
-                  innerHTML: rs:session_id
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Session file exist
-                -
-                  type: td
-                  innerHTML: 
-                    -
-                      type: span
-                      innerHTML: rs:session_file_exist_text
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: th
-                  innerHTML: Session content size
-                -
-                  type: td
-                  innerHTML: 
-                    -
-                      type: span
-                      innerHTML: rs:session_content_size
-            -
-              type: tr
-              innerHTML:
-                -
-                  type: td
+                  type: div
                   attribute:
-                    colspan: 2
-                    style: 'text-align:center'
-                  innerHTML: 
+                    class: col-sm-12
+                  innerHTML:
                     -
                       type: a
-                      settings:
-                        enabled: rs:session_file_exist
                       attribute:
-                        class: btn btn-default
-                        onclick: "PluginWfBootstrapjs.modal({id: 'account_session_content', url: '/'+app.class+'/account_session_content/id/'+app.account_id+'', lable: 'Session content'});"
-                      innerHTML: Show
-                    -
-                      type: a
-                      settings:
-                        enabled: rs:session_file_exist
-                      attribute:
-                        class: btn btn-warning
-                        onclick: "PluginWfBootstrapjs.modal({id: 'account_session_delete', url: '/'+app.class+'/account_session_delete/id/'+app.account_id+'', lable: 'Session delete'});"
+                        onclick: "PluginWfBootstrapjs.modal({id: 'account_delete', url: '/'+app.class+'/account_delete/id/'+app.account_id+'', lable: 'Delete account'});"
                       innerHTML: Delete
+                    -
+                      type: a
+                      attribute:
+                        onclick: "PluginWfBootstrapjs.modal({id: 'account_base_form', url: '/'+app.class+'/account_base_form/id/'+app.account_id+'', lable: 'Account'});"
+                      innerHTML: Edit
+            -
+              type: div
+              attribute:
+                class: table-responsive
+              innerHTML:
+                -
+                  type: table
+                  attribute:
+                    class: 'table'
+                  innerHTML:
+                    tbody:
+                      type: tbody
+                      innerHTML:
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: ID
+                            -
+                              type: td
+                              innerHTML: rs:id
+                            -
+                              type: th
+                              innerHTML: Email
+                            -
+                              type: td
+                              innerHTML: rs:email
+                            -
+                              type: th
+                              innerHTML: Username
+                            -
+                              type: td
+                              innerHTML: rs:username
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Password
+                            -
+                              type: td
+                              innerHTML: rs:password
+                            -
+                              type: th
+                              innerHTML: Phone
+                            -
+                              type: td
+                              innerHTML: rs:phone
+                            -
+                              type: th
+                              innerHTML: Language
+                            -
+                              type: td
+                              innerHTML: rs:language
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Activated
+                            -
+                              type: td
+                              innerHTML: rs:activated_text
+                            -
+                              type: th
+                              innerHTML: Full name
+                            -
+                              type: td
+                              innerHTML: rs:fullname
+                            -
+                              type: th
+                              innerHTML: PID
+                            -
+                              type: td
+                              innerHTML: rs:pid
+        -
+          text: Management
+          content:
+            -
+              type: div
+              attribute:
+                class: table-responsive
+              innerHTML:
+                -
+                  type: table
+                  attribute:
+                    class: 'table'
+                  innerHTML:
+                    tbody:
+                      type: tbody
+                      innerHTML:
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Activate key
+                            -
+                              type: td
+                              innerHTML: rs:activate_key
+                            -
+                              type: th
+                              innerHTML: Activate password
+                            -
+                              type: td
+                              innerHTML: rs:activate_password
+                            -
+                              type: th
+                              innerHTML: Activate date
+                            -
+                              type: td
+                              innerHTML: rs:activate_date
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Change email
+                            -
+                              type: td
+                              innerHTML: rs:change_email_email
+                            -
+                              type: th
+                              innerHTML: Change email key
+                            -
+                              type: td
+                              innerHTML: rs:change_email_key
+                            -
+                              type: th
+                              innerHTML: Change email date
+                            -
+                              type: td
+                              innerHTML: rs:change_email_date
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Two factor authentication key
+                            -
+                              type: td
+                              innerHTML: rs:two_factor_authentication_key
+                            -
+                              type: th
+                              innerHTML: Two factor authentication date
+                            -
+                              type: td
+                              innerHTML: rs:two_factor_authentication_date
+                            -
+                              type: th
+                              innerHTML: Cert ID
+                            -
+                              type: td
+                              innerHTML: rs:cert_id
+        -
+          text: History
+          content:
+            -
+              type: div
+              attribute:
+                class: table-responsive
+              innerHTML:
+                -
+                  type: table
+                  attribute:
+                    class: 'table'
+                  innerHTML:
+                    tbody:
+                      type: tbody
+                      innerHTML:
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Updated by
+                            -
+                              type: td
+                              innerHTML: rs:updated_by
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Created at
+                            -
+                              type: td
+                              innerHTML: rs:created_at
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Updated at
+                            -
+                              type: td
+                              innerHTML: rs:updated_at
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Created by
+                            -
+                              type: td
+                              innerHTML: rs:created_by
+        -
+          text: Session
+          content:
+            -
+              type: div
+              attribute:
+                class: table-responsive
+              innerHTML:
+                -
+                  type: table
+                  attribute:
+                    class: 'table'
+                  innerHTML:
+                    tbody:
+                      type: tbody
+                      innerHTML:
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Session ID
+                            -
+                              type: td
+                              innerHTML: rs:session_id
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Session file exist
+                            -
+                              type: td
+                              innerHTML: 
+                                -
+                                  type: span
+                                  innerHTML: rs:session_file_exist_text
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: th
+                              innerHTML: Session content size
+                            -
+                              type: td
+                              innerHTML: 
+                                -
+                                  type: span
+                                  innerHTML: rs:session_content_size
+                        -
+                          type: tr
+                          innerHTML:
+                            -
+                              type: td
+                              attribute:
+                                colspan: 2
+                                style: 'text-align:center'
+                              innerHTML: 
+                                -
+                                  type: a
+                                  settings:
+                                    enabled: rs:session_file_exist
+                                  attribute:
+                                    class: btn btn-default
+                                    onclick: "PluginWfBootstrapjs.modal({id: 'account_session_content', url: '/'+app.class+'/account_session_content/id/'+app.account_id+'', lable: 'Session content'});"
+                                  innerHTML: Show
+                                -
+                                  type: a
+                                  settings:
+                                    enabled: rs:session_file_exist
+                                  attribute:
+                                    class: btn btn-warning
+                                    onclick: "PluginWfBootstrapjs.modal({id: 'account_session_delete', url: '/'+app.class+'/account_session_delete/id/'+app.account_id+'', lable: 'Session delete'});"
+                                  innerHTML: Delete

@@ -81,10 +81,11 @@ class PluginAccountAdmin_v1{
       /**
        * 
        */
-      $rs->set("$key/has_image", 'No');
+      $rs->set("$key/has_image", '');
       $exist = wfFilesystem::fileExist(wfGlobals::getWebDir().$profile_image->get('web_dir').'/'.$item->get('id').'.jpg');
       if($exist){
-        $rs->set("$key/has_image", 'Yes');
+        $filename = wfSettings::replaceDir($profile_image->get('web_dir').'/'.$item->get('id').'.jpg');
+        $rs->set("$key/has_image", '<img src="'.$filename.'" style="width: 50px">');
       }
     }
     return $rs;

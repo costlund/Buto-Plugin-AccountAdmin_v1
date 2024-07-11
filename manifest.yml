@@ -1,5 +1,9 @@
-version: 1.15.6
+version: 1.16.0
 history:
+  1.16.0:
+    date: '2024-07-11'
+    title: Image
+    description: 'Add image upload. Show image column in list, Yes or No.'
   1.15.6:
     date: '2024-07-11'
     title: Readme

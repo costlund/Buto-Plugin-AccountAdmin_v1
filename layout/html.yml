@@ -40,6 +40,11 @@ content:
               method: js
               data:
                 file: /plugin/account/admin_v1/js/function.js                
+          -
+            type: widget
+            data:
+              plugin: 'upload/file'
+              method: include
       -
         type: body
         innerHTML: 'body...'

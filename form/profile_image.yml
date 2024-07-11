@@ -1,0 +1,16 @@
+id: account_admin_v1_profile_image
+url: '/users/account_image_capture?id=[id]'
+max_size: 5000000
+accept: jpg
+file_type: 'image/jpeg'
+dir: '[web_dir]/data/theme/[theme]/account/profile_image'
+web_dir: '/data/theme/[theme]/account/profile_image'
+name: '[id].jpg'
+image:
+  style: ''
+image_not_exist:
+  -
+    type: span
+    innerHTML: Upload
+success:
+  script: "PluginWfAjax.update('tab_account_image')"

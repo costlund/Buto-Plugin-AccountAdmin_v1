@@ -1,0 +1,27 @@
+
+-
+  type: div
+  attribute: 
+    class: row
+  innerHTML: 
+    -
+      type: div
+      attribute: 
+        class: col-md-3
+      innerHTML: 
+    -
+      type: div
+      attribute: 
+        class: col-md-6
+      innerHTML: 
+        -
+          type: div
+          attribute: 
+            class: alert alert-success
+          innerHTML:
+            -
+              type: widget
+              data:
+                plugin: 'upload/file'
+                method: element
+                data: yml:/plugin/account/admin_v1/form/profile_image.yml

@@ -1,0 +1,6 @@
+-
+  type: widget
+  data:
+    plugin: 'upload/file'
+    method: capture
+    data: yml:/plugin/account/admin_v1/form/profile_image.yml

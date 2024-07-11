@@ -23,6 +23,7 @@ class PluginAccountAdmin_v1{
       $this->i18n = new PluginI18nTranslate_v1();
       wfPlugin::enable('form/form_v1');
       wfPlugin::enable('chart/chartjs_4_4_1');
+      wfPlugin::enable('upload/file');
     }
   }
   private function init(){
@@ -71,11 +72,20 @@ class PluginAccountAdmin_v1{
     $rs = $this->executeSQL($this->sql->get('accounts'));
     wfPlugin::includeonce('browser/detection_v1');
     $browser = new PluginBrowserDetection_v1();    
+    $profile_image = new PluginWfYml(__DIR__.'/form/profile_image.yml');
     foreach ($rs->get() as $key => $value){
       $item = new PluginWfArray($value);
       $user_browser = $browser->get_browser($item->get('HTTP_USER_AGENT'), true);
       $rs->set("$key/os_name", $user_browser->get('os_name'));
       $rs->set("$key/browser_name", $user_browser->get('browser_name'));
+      /**
+       * 
+       */
+      $rs->set("$key/has_image", 'No');
+      $exist = wfFilesystem::fileExist(wfGlobals::getWebDir().$profile_image->get('web_dir').'/'.$item->get('id').'.jpg');
+      if($exist){
+        $rs->set("$key/has_image", 'Yes');
+      }
     }
     return $rs;
   }
@@ -172,6 +182,16 @@ class PluginAccountAdmin_v1{
     }
     $page = $this->getYml('page/account_session_delete.yml');
     $page->setByTag($rs->get());
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_image(){
+    $this->init();
+    $page = $this->getYml('page/account_image.yml');
+    wfDocument::renderElement($page->get());
+  }
+  public function page_account_image_capture(){
+    $this->init();
+    $page = $this->getYml('page/account_image_capture.yml');
     wfDocument::renderElement($page->get());
   }
   private function getAccount(){

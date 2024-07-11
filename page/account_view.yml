@@ -68,6 +68,18 @@
             class: nav-link
             href: '#'
           innerHTML: Roles
+    -
+      type: li
+      attribute:
+        class: nav-item
+        role: presentation
+      innerHTML:
+        -
+          type: a
+          attribute:
+            class: nav-link
+            href: '#'
+          innerHTML: Image
 -
   type: div
   attribute:
@@ -107,6 +119,17 @@
     -
       type: script
       innerHTML: document.getElementById('tab_account_roles').setAttribute('data-url', '/'+app.class+'/account_roles/id/'+app.account_id)
+    -
+      type: div
+      attribute:
+        id: tab_account_image
+        data-url: '_'
+        class: plugin_bootstrap_navtabs_content
+        style: 'display:none'
+      innerHTML: This content is static.
+    -
+      type: script
+      innerHTML: document.getElementById('tab_account_image').setAttribute('data-url', '/'+app.class+'/account_image/id/'+app.account_id)
 -
   type: script
   innerHTML: "PluginBootstrapNavtabs_v1.nav_init({ul: 'navtabs_account_view', content: 'content_account_view', click: 0});"

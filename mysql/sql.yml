@@ -235,4 +235,14 @@ account_delete:
   params:
     id:
       type: s
-  
+db_account_update:
+  sql: "update account set email=?, username=?, password=?, activated=1, updated_by='[user_id]', updated_at=now() where id=?;"
+  params:
+    email:
+      type: s
+    username:
+      type: s
+    password:
+      type: s
+    id:
+      type: s

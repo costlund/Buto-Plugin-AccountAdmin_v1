@@ -1,5 +1,9 @@
-version: 1.16.2
+version: 1.16.3
 history:
+  1.16.3:
+    date: '2024-12-17'
+    title: Method
+    description: Made method db_account_email_exist public. Add public method db_account_update.
   1.16.2:
     date: '2024-07-11'
     title: Layout

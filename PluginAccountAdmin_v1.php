@@ -394,7 +394,7 @@ class PluginAccountAdmin_v1{
     $this->executeSQL($this->sql->get('account_role_delete'));
     exit('{success: true, message: "Account role was deleted."}');
   }
-  private function createAccount(){
+  public function createAccount(){
     $uid = wfCrypt::getUid();
     $this->sql->set('account_capture_insert/params/id/value', $uid);
     $this->executeSQL($this->sql->get('account_capture_insert'));
@@ -512,7 +512,7 @@ class PluginAccountAdmin_v1{
       if($field=='username'){
         $rs = $this->db_account_username_exist($form->get("items/$field/post_value"));
       }elseif($field=='email'){
-        $rs = $this->db_account_email_exist($form->get("items/id/post_value"), $form->get("items/$field/post_value"));
+        $rs = $this->db_account_email_exist($form->get("items/$field/post_value"));
       }else{
         throw new Exception("wrong field...");
       }
@@ -569,7 +569,7 @@ class PluginAccountAdmin_v1{
     $rs = $this->executeSQL($this->sql->get('account_select_one_by_username'), true);
     return $rs;
   }
-  private function db_account_email_exist($id, $email){
+  public function db_account_email_exist($email){
     $this->init();
     $this->sql->set('account_select_one_by_email/params/email/value', $email);
     $rs = $this->executeSQL($this->sql->get('account_select_one_by_email'), true);
@@ -580,5 +580,14 @@ class PluginAccountAdmin_v1{
     $sql = new PluginWfYml(__DIR__.'/mysql/sql.yml', 'chart_account_log');
     $rs = $this->executeSQL($sql->get(), false);
     return $rs;
+  }
+  public function db_account_update($data){
+    $this->init();
+    $this->sql->set(__FUNCTION__.'/params/id/value', $data->get('id'));
+    $this->sql->set(__FUNCTION__.'/params/email/value', $data->get('email'));
+    $this->sql->set(__FUNCTION__.'/params/username/value', wfPhpfunc::substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
+    $this->sql->set(__FUNCTION__.'/params/password/value', wfPhpfunc::substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 8));
+    $this->executeSQL($this->sql->get(__FUNCTION__));
+    return null;
   }
 }

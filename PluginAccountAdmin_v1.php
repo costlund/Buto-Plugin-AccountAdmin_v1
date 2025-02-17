@@ -138,10 +138,18 @@ class PluginAccountAdmin_v1{
       $dataProvider[$key] = $value;
     }
     /**
+     * count_undetected
+     */
+    $count_undetected = 0;
+    if(isset($browser_detection[$type][''])){
+      $count_undetected = $browser_detection[$type][''];
+    }
+    /**
      * 
      */
     $element->setById('chart_'.$type.'', 'data/data/chart/data/graphs', $graphs);
     $element->setById('chart_'.$type.'', 'data/data/chart/data/dataProvider/0', $dataProvider);
+    $element->setByTag(array('count' => $count_undetected), 'undetected');
     return $element;
   }
   public function page_stat_os(){

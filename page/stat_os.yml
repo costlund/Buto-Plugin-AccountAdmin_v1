@@ -53,14 +53,20 @@
                       title: Users
                   allLabels: {  }
                   balloon: {  }
-                  titles:
-                    -
-                      id: Title-1
-                      size: 15
-                      text: OS
                   dataProvider:
                     -
                       users: 'Users'
                       windows: 8
                       linux: 5
+        -
+          type: div
+          innerHTML:
+            - 
+              type: strong
+              attribute:
+                class: content-colon
+              innerHTML: Undetected
+            - 
+              type: span
+              innerHTML: undetected:count
     
